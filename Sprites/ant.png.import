@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t3t1e04j0w88"
-path="res://.godot/imported/ant-bug-insect-pixel-art-video-game-bit-icon-197434082.jpg-87e4265bb173409e3b101b30262e4ad0.ctex"
+uid="uid://cxe6a2viyomyn"
+path="res://.godot/imported/ant.png-78c2dcccd9628b8f3b841717fc86cb51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ant-bug-insect-pixel-art-video-game-bit-icon-197434082.jpg"
-dest_files=["res://.godot/imported/ant-bug-insect-pixel-art-video-game-bit-icon-197434082.jpg-87e4265bb173409e3b101b30262e4ad0.ctex"]
+source_file="res://Sprites/ant.png"
+dest_files=["res://.godot/imported/ant.png-78c2dcccd9628b8f3b841717fc86cb51.ctex"]
 
 [params]
 
