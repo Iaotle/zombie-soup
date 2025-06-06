@@ -1,7 +1,10 @@
 extends Sprite2D
 
+@export var blood: PackedScene
+
+
 # Speed of the ant in pixels per second
-var speed := 100.0
+var speed := 200.0
 
 # Current velocity vector
 var velocity := Vector2.ZERO
@@ -63,5 +66,9 @@ func _input(event: InputEvent) -> void:
 		var sprite_rect = Rect2(top_left, tex_size)
 
 		if sprite_rect.has_point(mouse_pos):
-			hide()
+			var bleedFX = blood.instantiate()
+			bleedFX.global_position = global_position
+			bleedFX.one_shot = true;
+			bleedFX.finished.connect(func(): self.hide())
+			get_parent().add_child(bleedFX)
 			set_process(false)
