@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctnl30jc0g2ui"
-path="res://.godot/imported/splash.png-06ad523eafd01cc73836cb6efcf4ad65.ctex"
+uid="uid://d4cxumxfv04bj"
+path="res://.godot/imported/zombie_hand1.png-1d0958103eaa441877ea47832d200169.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/splash.png"
-dest_files=["res://.godot/imported/splash.png-06ad523eafd01cc73836cb6efcf4ad65.ctex"]
+source_file="res://Sprites/zombie_hand1.png"
+dest_files=["res://.godot/imported/zombie_hand1.png-1d0958103eaa441877ea47832d200169.ctex"]
 
 [params]
 

@@ -17,7 +17,7 @@ script = ExtResource("1_ngbw4")
 [node name="pl_0" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-2, -4)
 motion_scale = Vector2(0.02, 0.02)
-motion_mirroring = Vector2(360, 0)
+motion_mirroring = Vector2(640, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/pl_0"]
 scale = Vector2(0.592593, 0.72)
