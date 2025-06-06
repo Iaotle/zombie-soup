@@ -1,3 +1,29 @@
-[gd_scene format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=5 format=3 uid="uid://funbevyd5jtw"]
+
+[ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
+[ext_resource type="Texture2D" uid="uid://cn6ruatx3kkyc" path="res://Sprites/bg/tt.png" id="2_8gbba"]
+[ext_resource type="AudioStream" uid="uid://csr6aqjrxua5" path="res://inside-old-train-169418.mp3" id="3_8gbba"]
+[ext_resource type="AudioStream" uid="uid://b6awofdhr2op0" path="res://drinking-glasses-contact-clink-7172.mp3" id="4_jjvhh"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Parallax" parent="." instance=ExtResource("1_bo1nx")]
+
+[node name="train" type="Sprite2D" parent="."]
+scale = Vector2(0.417318, 0.352539)
+texture = ExtResource("2_8gbba")
+centered = false
+
+[node name="Train_audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8gbba")
+volume_db = -4.952
+pitch_scale = 0.81
+autoplay = true
+parameters/looping = true
+
+[node name="Glass_audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jjvhh")
+volume_db = -15.848
+pitch_scale = 0.81
+autoplay = true
+parameters/looping = true
