@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b15lmfsr1mi0x"]
+[gd_scene load_steps=4 format=3 uid="uid://b15lmfsr1mi0x"]
 
 [ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_olfbw"]
 [ext_resource type="Script" uid="uid://rsou2pplwl3v" path="res://GameObjects/ant.gd" id="2_jhtvu"]
+[ext_resource type="PackedScene" uid="uid://c05gk8qp4kvng" path="res://Effects/blood.tscn" id="3_jhtvu"]
 
 [node name="Ant" type="Sprite2D"]
 scale = Vector2(0.0454545, 0.0454545)
 texture = ExtResource("1_olfbw")
 script = ExtResource("2_jhtvu")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+blood = ExtResource("3_jhtvu")
