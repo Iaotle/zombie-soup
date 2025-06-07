@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dve1iy000ntm2"]
 
-[ext_resource type="Script" path="res://Scenes/undercounter.gd" id="1_2cta0"]
+[ext_resource type="Script" uid="uid://c4dbocrpwpgmc" path="res://Scenes/undercounter.gd" id="1_2cta0"]
 [ext_resource type="Texture2D" uid="uid://b30v1vychxfyv" path="res://Concepts/ChatGPT Image Jun 6, 2025, 08_38_41 PM.png" id="2_aypby"]
 [ext_resource type="PackedScene" uid="uid://b15lmfsr1mi0x" path="res://GameObjects/ant.tscn" id="3_o5jyx"]
 

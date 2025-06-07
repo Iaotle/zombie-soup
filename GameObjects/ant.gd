@@ -4,7 +4,7 @@ extends Sprite2D
 
 
 # Speed of the ant in pixels per second
-var speed := 200.0
+@export var speed := 200.0
 
 # Current velocity vector
 var velocity := Vector2.ZERO
@@ -72,3 +72,4 @@ func _input(event: InputEvent) -> void:
 			bleedFX.finished.connect(func(): self.hide())
 			get_parent().add_child(bleedFX)
 			set_process(false)
+			queue_free()

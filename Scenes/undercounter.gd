@@ -22,7 +22,6 @@ func _ready() -> void:
 	add_child(spawn_timer)
 
 func _on_timer_timeout() -> void:
-	print('spawning ant')
 	# Instantiate and add the ant to the scene tree at this node’s position
 	var new_ant = ant.instantiate()
 	new_ant.position = global_position
