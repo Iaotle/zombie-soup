@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=14 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="8_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Texture2D" uid="uid://dj5gkn2be1840" path="res://Sprites/zombie_mad.png" id="11_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1ilt")
@@ -59,3 +60,5 @@ texture = ExtResource("8_ynf5e")
 position = Vector2(350, 388)
 scale = Vector2(0.162109, 0.162109)
 texture = ExtResource("10_6iyac")
+
+[node name="Player" parent="." instance=ExtResource("13_fdnlq")]

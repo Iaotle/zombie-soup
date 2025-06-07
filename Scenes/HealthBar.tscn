@@ -5,14 +5,22 @@
 [node name="HealthBar" type="CanvasLayer"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 25.0
+offset_top = 22.0
+offset_right = 157.0
+offset_bottom = 62.0
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Heart" parent="HBoxContainer/TextureRect" instance=ExtResource("1_1f0m8")]
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Heart" parent="HBoxContainer/TextureRect2" instance=ExtResource("1_1f0m8")]
 
 [node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
@@ -25,8 +33,3 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Heart" parent="HBoxContainer/TextureRect4" instance=ExtResource("1_1f0m8")]
-
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="Heart" parent="HBoxContainer/TextureRect2" instance=ExtResource("1_1f0m8")]
