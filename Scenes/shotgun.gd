@@ -6,6 +6,7 @@ extends Sprite2D
 
 var picked_up := false
 var pov_sprite: Sprite2D
+var crosshair = preload("res://Sprites/crosshair.png")
 
 func _ready():
 	set_process_input(true)
@@ -18,9 +19,20 @@ func _input(event):
 			# TODO: detect if the click is on an object in group 'enemies'
 			_fire_shotgun()
 
+func put_down_shotgun():
+	if picked_up:
+		pov_sprite.queue_free()
+		picked_up = false
+		visible = true
+		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
+		print("Shotgun put down")
+
 func _pickup_shotgun():
 	picked_up = true
 	visible = false
+	# change the crosshair to res://Sprites/crosshair.png, offset by 24px
+	Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(24, 24))
+
 	pov_sprite = Sprite2D.new()
 	pov_sprite.texture = load(pov_sprite_path)
 	pov_sprite.scale = Vector2(0.3, 0.3) # Adjust scale as needed

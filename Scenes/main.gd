@@ -134,11 +134,12 @@ func _become_angry(window_id):
 	data["angry_timer"].start(5)
 
 func _input(event):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and $Shotgun.picked_up:
 		for window_id in active_enemies.keys():
 			var data = active_enemies[window_id]
 			var sprite = data["sprite"]
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
+				$Shotgun.put_down_shotgun()
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
 				_remove_enemy(window_id)
