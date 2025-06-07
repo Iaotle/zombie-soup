@@ -34,6 +34,7 @@ func spawn_enemy(window_id):
 	var def = ENEMY_DEFS[randi() % ENEMY_DEFS.size()]
 	# Create and configure sprite
 	var sprite = Sprite2D.new()
+	sprite.z_index = -1;
 	sprite.texture = def["calm_texture"]
 	sprite.scale = def["calm_scale"]
 	# Determine off-screen spawn X
