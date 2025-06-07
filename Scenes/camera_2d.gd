@@ -4,7 +4,7 @@ var y_offset = 57
 var in_bar = true
 var target_position: Vector2
 var is_moving = false
-var move_speed = 200
+var move_speed = 400
 
 func _ready():
 	set_process_input(true)

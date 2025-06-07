@@ -8,7 +8,7 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/zombie_mad.png"),
 		"calm_scale": Vector2(0.13, 0.13),
 		"angry_scale": Vector2(0.29, 0.29),
-		"ingredients": ['eye', 'brain', 'heart'],
+		"ingredients": ['eye', 'brains', 'heart'],
 		"spawn_y": 152,
 		"target_positions": {1: Vector2(147, 152), 2: Vector2(512, 152)},
 		"angry_positions": {1: Vector2(140, 162), 2: Vector2(500, 162)},
@@ -21,7 +21,7 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/mutant_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['finger', 'tooth', 'bone'],
+		"ingredients": ['bones', 'ant'],
 		"spawn_y": 141,
 		"target_positions": {1: Vector2(147, 141), 2: Vector2(508, 141)},
 		"angry_positions": {1: Vector2(140, 140), 2: Vector2(500, 140)},
@@ -83,6 +83,23 @@ func spawn_enemy(window_id):
 		"current_ingredient": ""
 	}
 	print("Spawned %s in window %d" % [def["name"], window_id])
+func _create_chat_bubble(enemy_sprite, ingredient_name):
+	var chat_bubble = Sprite2D.new()
+	chat_bubble.z_index = 1
+	chat_bubble.texture = preload("res://Sprites/chat.png")
+	chat_bubble.scale = Vector2(0.5, 0.5)
+	chat_bubble.position = Vector2(0, 0)
+	
+	var ingredient_sprite = Sprite2D.new()
+	ingredient_sprite.texture = load("res://Sprites/%s.png" % ingredient_name)
+	# ingredient_sprite.position = chat_bubble.texture.get_size() * 0.5
+	var bubble_size = chat_bubble.texture.get_size()
+	var ingredient_size = ingredient_sprite.texture.get_size()
+	var scale_ratio = min((bubble_size.x * 0.8) / ingredient_size.x, (bubble_size.y * 0.5) / ingredient_size.y)
+	ingredient_sprite.scale = Vector2.ONE * scale_ratio
+	chat_bubble.add_child(ingredient_sprite)
+
+	enemy_sprite.add_child(chat_bubble)
 
 func _process(delta):
 	for window_id in active_enemies.keys():
@@ -98,6 +115,8 @@ func _process(delta):
 					data["state"] = "waiting"
 					data["current_ingredient"] = def["ingredients"][randi() % def["ingredients"].size()]
 					print("%s arrived at window %d, demand: %s" % [def["name"], window_id, data["current_ingredient"]])
+					# create res://Sprites/chat.png bubble, position it above the sprite. Put res://Sprites/{ingredient}.png inside it.
+					_create_chat_bubble(sprite, data["current_ingredient"])
 					data["demand_timer"].start(5)
 			"angry":
 				pass
