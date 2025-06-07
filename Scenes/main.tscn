@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=12 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
-[ext_resource type="Texture2D" uid="uid://b504wdgwghyfj" path="res://Sprites/zombie.png" id="2_6iyac"]
 [ext_resource type="Texture2D" uid="uid://cn6ruatx3kkyc" path="res://Sprites/bg/tt.png" id="2_8gbba"]
 [ext_resource type="AudioStream" uid="uid://csr6aqjrxua5" path="res://inside-old-train-169418.mp3" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://chube24h7y0h" path="res://Scenes/camera_2d.gd" id="4_21xkr"]
@@ -11,13 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dwok1ybywkx6n" path="res://Sprites/heart.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="8_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
-[ext_resource type="Texture2D" uid="uid://dj5gkn2be1840" path="res://Sprites/zombie_mad.png" id="11_d1ilt"]
-[ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
+[ext_resource type="PackedScene" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1ilt")
-calm_texture = ExtResource("2_6iyac")
-angry_texture = ExtResource("11_d1ilt")
 
 [node name="Parallax" parent="." instance=ExtResource("1_bo1nx")]
 

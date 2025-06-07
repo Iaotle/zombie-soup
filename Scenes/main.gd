@@ -1,97 +1,142 @@
 extends Node2D
+# Define your enemy types here:
+var ENEMY_DEFS = [
+	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
+		{
+		"name": "zombie",
+		"calm_texture": preload("res://Sprites/zombie.png"),
+		"angry_texture": preload("res://Sprites/zombie_mad.png"),
+		"calm_scale": Vector2(0.13, 0.13),
+		"angry_scale": Vector2(0.29, 0.29),
+		"ingredients": ['eye', 'brain', 'heart'],
+		"spawn_y": 152,
+		"target_positions": {1: Vector2(147, 152), 2: Vector2(512, 152)},
+		"angry_positions": {1: Vector2(140, 162), 2: Vector2(500, 162)},
+		"angry_sound": preload("res://zombie_mad.mp3")
+	},
+]
 
-@export var calm_texture: Texture2D
-@export var angry_texture: Texture2D
-@export var ingredient: Array[String] = []
-
-var sprite: Sprite2D
-var target_pos: Vector2
-var target_window: int
-var current_ingredient: String
-var state: String = "idle"
-var demand_timer: Timer
-var angry_timer: Timer
+# Tracks active enemies by window (1 or 2)
+var active_enemies := {}
 
 func _ready():
 	randomize()
-	spawn_zombie()
+	# Spawn one enemy in each window at start
+	for window_id in [1, 2]:
+		spawn_enemy(window_id)
 
-func spawn_zombie():
-	if sprite:
-		sprite.queue_free()
-	sprite = Sprite2D.new()
-	sprite.texture = calm_texture
-	sprite.scale = Vector2(0.13, 0.13)
-	add_child(sprite)
-
+func spawn_enemy(window_id):
+	if active_enemies.has(window_id):
+		return
+	if ENEMY_DEFS.is_empty():
+		push_error("No enemy definitions found!")
+		return
+	var def = ENEMY_DEFS[randi() % ENEMY_DEFS.size()]
+	# Create and configure sprite
+	var sprite = Sprite2D.new()
+	sprite.texture = def["calm_texture"]
+	sprite.scale = def["calm_scale"]
+	# Determine off-screen spawn X
 	var screen_size = get_viewport_rect().size
-	var left_side = randi() % 2 == 0
-	var off_x = - sprite.texture.get_width() * sprite.scale.x if left_side else screen_size.x + sprite.texture.get_width() * sprite.scale.x
-	sprite.position = Vector2(off_x, 152)
-
-	target_window = randi() % 2 + 1
-	target_pos = Vector2(147, 152) if target_window == 1 else Vector2(512, 152)
-	state = "walking"
-	print("Spawned zombie, target window %d" % target_window)
-
-	if not demand_timer:
-		demand_timer = Timer.new()
-		demand_timer.one_shot = true
-		add_child(demand_timer)
-		demand_timer.connect("timeout", Callable(self, "_on_demand_timeout"))
-	if not angry_timer:
-		angry_timer = Timer.new()
-		angry_timer.one_shot = true
-		add_child(angry_timer)
-		angry_timer.connect("timeout", Callable(self, "_on_angry_timeout"))
+	var off_x = - sprite.texture.get_width() * sprite.scale.x if window_id == 1 else screen_size.x + sprite.texture.get_width() * sprite.scale.x
+	sprite.position = Vector2(off_x, def["spawn_y"])
+	add_child(sprite)
+	# Create timers
+	var demand_timer = Timer.new()
+	demand_timer.one_shot = true
+	add_child(demand_timer)
+	demand_timer.connect("timeout", Callable(self, "_on_demand_timeout").bind(window_id))
+	var angry_timer = Timer.new()
+	angry_timer.one_shot = true
+	add_child(angry_timer)
+	angry_timer.connect("timeout", Callable(self, "_on_angry_timeout").bind(window_id))
+	# Store enemy data
+	active_enemies[window_id] = {
+		"def": def,
+		"sprite": sprite,
+		"state": "walking",
+		"demand_timer": demand_timer,
+		"angry_timer": angry_timer,
+		"current_ingredient": ""
+	}
+	print("Spawned %s in window %d" % [def["name"], window_id])
 
 func _process(delta):
-	if state == "walking":
-		sprite.position = sprite.position.move_toward(target_pos, 100 * delta)
-		if sprite.position.distance_to(target_pos) < 5:
-			sprite.position = target_pos
-			state = "waiting"
-			current_ingredient = ingredient[randi() % ingredient.size()] if ingredient.size() > 0 else ""
-			print("Zombie arrived at window %d, demand: %s" % [target_window, current_ingredient])
-			demand_timer.start(5)
+	for window_id in active_enemies.keys():
+		var data = active_enemies[window_id]
+		var def = data["def"]
+		var sprite = data["sprite"]
+		match data["state"]:
+			"walking":
+				var target = def["target_positions"][window_id]
+				sprite.position = sprite.position.move_toward(target, 100 * delta)
+				if sprite.position.distance_to(target) < 5:
+					sprite.position = target
+					data["state"] = "waiting"
+					data["current_ingredient"] = def["ingredients"][randi() % def["ingredients"].size()]
+					print("%s arrived at window %d, demand: %s" % [def["name"], window_id, data["current_ingredient"]])
+					data["demand_timer"].start(5)
+			"angry":
+				pass
 
-func feed_zombie():
-	if state == "waiting":
-		print("Fed zombie with %s" % current_ingredient)
-		demand_timer.stop()
-		sprite.queue_free()
-		spawn_zombie()
+func feed_enemy(window_id):
+	if not active_enemies.has(window_id):
+		return
+	var data = active_enemies[window_id]
+	if data["state"] == "waiting":
+		print("Fed %s with %s" % [data["def"]["name"], data["current_ingredient"]])
+		data["demand_timer"].stop()
+		_remove_enemy(window_id)
+		spawn_enemy(window_id)
 
-func _on_demand_timeout():
-	print("Zombie not fed, getting angry")
-	become_angry()
+func _on_demand_timeout(window_id):
+	var data = active_enemies[window_id]
+	print("%s at window %d not fed, getting angry" % [data["def"]["name"], window_id])
+	_become_angry(window_id)
 
-func become_angry():
-	state = "angry"
-	sprite.texture = angry_texture
-	sprite.scale = Vector2(0.29, 0.29)
-	sprite.position = Vector2(140, 162) if target_window == 1 else Vector2(500, 162)
-	print("Zombie is angry!")
-	angry_timer.start(5)
+func _become_angry(window_id):
+	var data = active_enemies[window_id]
+	data["state"] = "angry"
+	var def = data["def"]
+	var sprite = data["sprite"]
+	sprite.texture = def["angry_texture"]
+	sprite.scale = def["angry_scale"]
+	sprite.position = def["angry_positions"][window_id]
+	# Play angry sound
+	var snd = AudioStreamPlayer2D.new()
+	snd.stream = def["angry_sound"]
+	add_child(snd)
+	snd.play()
+	print("%s is angry at window %d!" % [def["name"], window_id])
+	data["angry_timer"].start(5)
 
 func _input(event):
-	if state == "angry" and event is InputEventMouseButton and event.pressed:
-		if event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
-			print("Zombie shot!")
-			angry_timer.stop()
-			sprite.queue_free()
-			spawn_zombie()
+	if event is InputEventMouseButton and event.pressed:
+		for window_id in active_enemies.keys():
+			var data = active_enemies[window_id]
+			var sprite = data["sprite"]
+			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
+				print("%s at window %d shot!" % [data["def"]["name"], window_id])
+				data["angry_timer"].stop()
+				_remove_enemy(window_id)
+				spawn_enemy(window_id)
+				return
 
-func _on_angry_timeout():
-	print("Zombie not shot, game over")
+func _on_angry_timeout(window_id):
+	print("%s at window %d not shot, game over" % [active_enemies[window_id]["def"]["name"], window_id])
 	game_over()
+
+func _remove_enemy(window_id):
+	var data = active_enemies[window_id]
+	data["sprite"].queue_free()
+	data["demand_timer"].queue_free()
+	data["angry_timer"].queue_free()
+	active_enemies.erase(window_id)
 
 func game_over():
 	var label = Label.new()
 	label.text = "Game Over"
 	label.modulate = Color.RED
-	# label.align = Label.Align.CENTER
-	# label.valign = Label.VAlign.CENTER
 	var center = get_viewport_rect().size / 2
 	label.position = center - (label.get_size() / 2)
 	add_child(label)
