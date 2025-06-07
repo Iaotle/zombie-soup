@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgkv1lmbb7iut"]
+
+[ext_resource type="PackedScene" uid="uid://cxtt8lwjdljkr" path="res://Scenes/heart.tscn" id="1_1f0m8"]
+
+[node name="HealthBar" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Heart" parent="HBoxContainer/TextureRect" instance=ExtResource("1_1f0m8")]
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Heart" parent="HBoxContainer/TextureRect3" instance=ExtResource("1_1f0m8")]
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Heart" parent="HBoxContainer/TextureRect4" instance=ExtResource("1_1f0m8")]
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Heart" parent="HBoxContainer/TextureRect2" instance=ExtResource("1_1f0m8")]
