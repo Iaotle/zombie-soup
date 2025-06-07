@@ -22,7 +22,6 @@ func take_damage():
 		# game over here
 		
 func update_heart():
-	print("heeee")
 	for i in range(heart_list.size()):
 		heart_list[i].visible = i < health;
 		print(health);

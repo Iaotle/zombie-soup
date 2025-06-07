@@ -3,6 +3,7 @@ extends Sprite2D
 @export var pov_sprite_path: String = "res://Sprites/shotgun-pov.png"
 @export var reload_sound_path: String = "res://reload.mp3"
 @export var fire_sounds: Array[String] = ["res://shotgun-fire-1.mp3", "res://shotgun-fire-2.mp3"]
+@export var camera: Camera2D 
 
 var picked_up := false
 var pov_sprite: Sprite2D
@@ -13,7 +14,7 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not picked_up and is_pixel_opaque(get_local_mouse_position()):
+		if not picked_up and is_pixel_opaque(get_local_mouse_position()) and !camera.in_bar:
 			_pickup_shotgun()
 		elif picked_up:
 			# TODO: detect if the click is on an object in group 'enemies'

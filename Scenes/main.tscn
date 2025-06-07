@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b6awofdhr2op0" path="res://drinking-glasses-contact-clink-7172.mp3" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
-[ext_resource type="Script" path="res://Scenes/shotgun.gd" id="11_6iyac"]
+[ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
 [node name="Main" type="Node2D"]
@@ -42,15 +42,18 @@ pitch_scale = 0.81
 autoplay = true
 parameters/looping = true
 
-[node name="Shotgun" type="Sprite2D" parent="."]
+[node name="Shotgun" type="Sprite2D" parent="." node_paths=PackedStringArray("camera")]
 position = Vector2(350, 388)
 scale = Vector2(0.162109, 0.162109)
 texture = ExtResource("10_6iyac")
 script = ExtResource("11_6iyac")
+camera = NodePath("../Camera2D")
 
 [node name="Player" parent="." instance=ExtResource("13_fdnlq")]
 
 [node name="InventoryUi" parent="Player" index="1" node_paths=PackedStringArray("spawner")]
 spawner = NodePath("../../Under The Counter")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [editable path="Player"]
