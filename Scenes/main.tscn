@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=9 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://cn6ruatx3kkyc" path="res://Sprites/bg/tt.png" id="2_8gbba"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://chube24h7y0h" path="res://Scenes/camera_2d.gd" id="4_21xkr"]
 [ext_resource type="AudioStream" uid="uid://b6awofdhr2op0" path="res://drinking-glasses-contact-clink-7172.mp3" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
+[ext_resource type="Texture2D" uid="uid://dwok1ybywkx6n" path="res://Sprites/heart.png" id="7_344ge"]
+[ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="8_ynf5e"]
 
 [node name="Main" type="Node2D"]
 
@@ -36,3 +38,12 @@ volume_db = -15.848
 pitch_scale = 0.81
 autoplay = true
 parameters/looping = true
+
+[node name="Heart" type="Sprite2D" parent="."]
+position = Vector2(243.5, 174.867)
+scale = Vector2(0.453125, 0.453125)
+texture = ExtResource("7_344ge")
+
+[node name="Eye" type="Sprite2D" parent="."]
+position = Vector2(216, 293)
+texture = ExtResource("8_ynf5e")

@@ -66,9 +66,13 @@ func _input(event: InputEvent) -> void:
 		var sprite_rect = Rect2(top_left, tex_size)
 
 		if sprite_rect.has_point(mouse_pos):
+			print("Ant clicked!")
 			var bleedFX = blood.instantiate()
-			bleedFX.global_position = global_position
+			bleedFX.position = mouse_pos
 			bleedFX.one_shot = true;
-			bleedFX.finished.connect(func(): self.hide())
-			get_parent().add_child(bleedFX)
+			# make a lambda function to hide the ant after the effect finishes
+			bleedFX.connect('finished', func() -> void:
+				self.hide()
+			)
 			set_process(false)
+			add_child(bleedFX)
