@@ -8,6 +8,7 @@ extends Node2D
 
 # Reference to the Timer node
 var spawn_timer: Timer
+signal update_ant_count
 
 func _ready() -> void:
 	# Grab the Timer that should be a child of this Node2D
@@ -26,3 +27,7 @@ func _on_timer_timeout() -> void:
 	var new_ant = ant.instantiate()
 	new_ant.position = global_position
 	add_child(new_ant)
+	new_ant.connect("ant_clicked", _update_ui)
+
+func _update_ui():
+	emit_signal("update_ant_count");

@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3tkgdxbtxl8r"]
+
+[ext_resource type="Script" uid="uid://dvsi3wfaurdqk" path="res://Scenes/inventory_ui.gd" id="1_7oojl"]
+[ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_brbew"]
+[ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="2_7oojl"]
+[ext_resource type="Texture2D" uid="uid://kx8im43q30lu" path="res://Sprites/brains.png" id="3_6o8f3"]
+[ext_resource type="Texture2D" uid="uid://b2td8q16yoyur" path="res://Sprites/bones.png" id="4_m65me"]
+
+[node name="InventoryUi" type="CanvasLayer"]
+script = ExtResource("1_7oojl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 381.0
+offset_top = 10.0
+offset_right = 621.0
+offset_bottom = 50.0
+
+[node name="Ants" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(57, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Ants"]
+position = Vector2(1, 10)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_brbew")
+centered = false
+
+[node name="Label" type="Label" parent="HBoxContainer/Ants"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 14.0
+offset_right = 58.0
+offset_bottom = 37.0
+text = "0"
+
+[node name="Eyes" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(57, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Eyes"]
+position = Vector2(1, 10)
+texture = ExtResource("2_7oojl")
+centered = false
+
+[node name="Label" type="Label" parent="HBoxContainer/Eyes"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 14.0
+offset_right = 58.0
+offset_bottom = 37.0
+text = "0"
+
+[node name="Brains" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(57, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Brains"]
+position = Vector2(1, 10)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_6o8f3")
+centered = false
+
+[node name="Label" type="Label" parent="HBoxContainer/Brains"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 14.0
+offset_right = 58.0
+offset_bottom = 37.0
+text = "0"
+
+[node name="Bones" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(57, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Bones"]
+position = Vector2(1, 10)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_m65me")
+centered = false
+
+[node name="Label" type="Label" parent="HBoxContainer/Bones"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 14.0
+offset_right = 58.0
+offset_bottom = 37.0
+text = "0"

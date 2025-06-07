@@ -1,11 +1,10 @@
 extends Sprite2D
 
 @export var blood: PackedScene
-
+signal ant_clicked
 
 # Speed of the ant in pixels per second
 @export var speed := 200.0
-
 # Current velocity vector
 var velocity := Vector2.ZERO
 
@@ -74,5 +73,6 @@ func _input(event: InputEvent) -> void:
 			bleedFX.connect('finished', func() -> void:
 				self.hide()
 			)
+			emit_signal("ant_clicked")
 			set_process(false)
 			queue_free()

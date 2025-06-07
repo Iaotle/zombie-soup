@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dwok1ybywkx6n" path="res://Sprites/heart.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="8_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
-[ext_resource type="PackedScene" path="res://Scenes/player.tscn" id="13_fdnlq"]
+[ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1ilt")
