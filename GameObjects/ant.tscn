@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c05gk8qp4kvng" path="res://Effects/blood.tscn" id="3_jhtvu"]
 
 [node name="Ant" type="Sprite2D"]
-scale = Vector2(0.01, 0.01)
+scale = Vector2(0.015, 0.015)
 texture = ExtResource("1_olfbw")
 script = ExtResource("2_jhtvu")
 blood = ExtResource("3_jhtvu")
