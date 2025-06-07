@@ -13,3 +13,8 @@ timeout = 3.0
 position = Vector2(320, 180.5)
 scale = Vector2(0.416667, 0.350586)
 texture = ExtResource("2_aypby")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 216.0
+offset_bottom = 40.0
+text = "Ants killed:"
