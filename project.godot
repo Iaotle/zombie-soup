@@ -23,6 +23,10 @@ window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://1ihcocvjfs3h"
 mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
+[global_group]
+
+enemies=""
+
 [input]
 
 scroll_up={

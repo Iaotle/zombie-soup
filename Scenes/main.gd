@@ -41,7 +41,7 @@ func _ready():
 	spawn_timer.one_shot = true
 	add_child(spawn_timer)
 	spawn_timer.connect("timeout", Callable(self, "_on_delayed_spawn"))
-	spawn_timer.start(1.0)
+	spawn_timer.start(5)
 
 func _on_delayed_spawn():
 	spawn_enemy(2)
@@ -55,6 +55,7 @@ func spawn_enemy(window_id):
 	var def = ENEMY_DEFS[randi() % ENEMY_DEFS.size()]
 	# Create and configure sprite
 	var sprite = Sprite2D.new()
+	sprite.add_to_group("enemies")
 	sprite.z_index = -1;
 	sprite.texture = def["calm_texture"]
 	sprite.scale = def["calm_scale"]
