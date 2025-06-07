@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3tkgdxbtxl8r"]
+[gd_scene load_steps=7 format=3 uid="uid://c3tkgdxbtxl8r"]
 
 [ext_resource type="Script" uid="uid://dvsi3wfaurdqk" path="res://Scenes/inventory_ui.gd" id="1_7oojl"]
 [ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_brbew"]
+[ext_resource type="Script" uid="uid://c6eptt0nri736" path="res://Scenes/draggable.gd" id="2_6o8f3"]
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="2_7oojl"]
 [ext_resource type="Texture2D" uid="uid://kx8im43q30lu" path="res://Sprites/brains.png" id="3_6o8f3"]
 [ext_resource type="Texture2D" uid="uid://b2td8q16yoyur" path="res://Sprites/bones.png" id="4_m65me"]
@@ -18,6 +19,7 @@ offset_bottom = 50.0
 [node name="Ants" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(57, 0)
 layout_mode = 2
+script = ExtResource("2_6o8f3")
 
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Ants"]
 position = Vector2(1, 10)

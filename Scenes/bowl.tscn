@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c72n2kdgov1d1"]
+
+[ext_resource type="Texture2D" uid="uid://cw0h64v2sotr0" path="res://Sprites/bowl.png" id="1_mdowk"]
+[ext_resource type="Script" uid="uid://yrntkav6b3j5" path="res://Scenes/bowl.gd" id="2_78wkd"]
+
+[node name="Bowl" type="Sprite2D"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_mdowk")
+centered = false
+script = ExtResource("2_78wkd")

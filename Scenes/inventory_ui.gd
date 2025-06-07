@@ -19,6 +19,7 @@ func _ready() -> void:
 	eyes_label 		= $HBoxContainer/Eyes/Label
 	brains_label 	= $HBoxContainer/Brains/Label
 	bones_label 	= $HBoxContainer/Bones/Label
+	
 	ants.init_item('ants', 0);
 	eyes.init_item('eyes', 0);
 	brains.init_item('brains', 0);
