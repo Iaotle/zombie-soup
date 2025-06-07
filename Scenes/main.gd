@@ -2,7 +2,7 @@ extends Node2D
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
-		{
+	{
 		"name": "zombie",
 		"calm_texture": preload("res://Sprites/zombie.png"),
 		"angry_texture": preload("res://Sprites/zombie_mad.png"),
@@ -14,6 +14,19 @@ var ENEMY_DEFS = [
 		"angry_positions": {1: Vector2(140, 162), 2: Vector2(500, 162)},
 		"angry_sound": preload("res://zombie_mad.mp3")
 	},
+	# same but for mutant:
+	{
+		"name": "mutant",
+		"calm_texture": preload("res://Sprites/mutant.png"),
+		"angry_texture": preload("res://Sprites/mutant_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['finger', 'tooth', 'bone'],
+		"spawn_y": 141,
+		"target_positions": {1: Vector2(147, 141), 2: Vector2(508, 141)},
+		"angry_positions": {1: Vector2(140, 140), 2: Vector2(500, 140)},
+		"angry_sound": preload("res://zombie_mad.mp3")
+	}
 ]
 
 # Tracks active enemies by window (1 or 2)
@@ -21,9 +34,17 @@ var active_enemies := {}
 
 func _ready():
 	randomize()
-	# Spawn one enemy in each window at start
-	for window_id in [1, 2]:
-		spawn_enemy(window_id)
+	# Spawn one enemy in window 1 immediately.
+	spawn_enemy(1)
+	# Delay spawn for window 2.
+	var spawn_timer = Timer.new()
+	spawn_timer.one_shot = true
+	add_child(spawn_timer)
+	spawn_timer.connect("timeout", Callable(self, "_on_delayed_spawn"))
+	spawn_timer.start(1.0)
+
+func _on_delayed_spawn():
+	spawn_enemy(2)
 
 func spawn_enemy(window_id):
 	if active_enemies.has(window_id):
@@ -124,8 +145,21 @@ func _input(event):
 				return
 
 func _on_angry_timeout(window_id):
-	print("%s at window %d not shot, game over" % [active_enemies[window_id]["def"]["name"], window_id])
-	game_over()
+	print("%s at window %d not shot" % [active_enemies[window_id]["def"]["name"], window_id])
+	$Player.take_damage()
+	# flash screen red
+	var flash = ColorRect.new()
+	flash.color = Color(1, 0, 0, 0.5)
+	flash.size = get_viewport_rect().size
+	flash.position = Vector2.ZERO
+	add_child(flash)
+	# Fade out the flash using Tween
+	var tween = create_tween()
+	tween.tween_property(flash, "modulate:a", 0.0, 0.5)
+	tween.connect("finished", Callable(flash, "queue_free"))
+	# remove enemy
+	_remove_enemy(window_id)
+	spawn_enemy(window_id)
 
 func _remove_enemy(window_id):
 	var data = active_enemies[window_id]
