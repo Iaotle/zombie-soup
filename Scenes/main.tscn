@@ -58,3 +58,8 @@ scale = Vector2(0.162109, 0.162109)
 texture = ExtResource("10_6iyac")
 
 [node name="Player" parent="." instance=ExtResource("13_fdnlq")]
+
+[node name="InventoryUi" parent="Player" index="1" node_paths=PackedStringArray("spawner")]
+spawner = NodePath("../../Under The Counter")
+
+[editable path="Player"]
