@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://3e11h2roa1dl" path="res://Sprites/shotgun_shell.png" id="2_yxtxo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tl8wn"]
-radius = 4.0
-height = 14.0
+radius = 6.0
+height = 24.0
 
 [node name="RbBullet" type="RigidBody2D" groups=["bullet", "pickable"]]
 input_pickable = true
@@ -13,7 +13,7 @@ mass = 50.0
 script = ExtResource("1_yxtxo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.02, 0.02)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_yxtxo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

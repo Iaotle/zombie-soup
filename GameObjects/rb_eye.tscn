@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="2_ai1nk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yl62e"]
-radius = 6.0
+radius = 9.0
 
 [node name="RbEye" type="RigidBody2D" groups=["pickable"]]
 input_pickable = true
@@ -13,7 +13,7 @@ script = ExtResource("1_ai1nk")
 content = "eye"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_ai1nk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

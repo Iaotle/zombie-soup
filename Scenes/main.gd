@@ -43,7 +43,7 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['bones', 'ant', 'eye'],
-		"on_kill": ['bones', 'brains'],
+		"on_kill": ['eye', 'brains'],
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
@@ -56,7 +56,7 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['eye'],
-		"on_kill": ['eye', 'bones'],
+		"on_kill": ['eye', 'brains'],
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(135, 158), 2: Vector2(515, 158)},
 		"angry_positions": {1: Vector2(127, 158), 2: Vector2(519, 158)},
@@ -69,7 +69,7 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.117, 0.117),
 		"ingredients": ['bones'],
-		"on_kill": ['eye', 'bones'],
+		"on_kill": ['eye', 'brains'],
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(128, 158), 2: Vector2(524, 158)},
 		"angry_positions": {1: Vector2(143, 150), 2: Vector2(506, 149)},
@@ -82,7 +82,7 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.121, 0.121),
 		"angry_scale": Vector2(0.114, 0.114),
 		"ingredients": ['eye'],
-		"on_kill": ['eye', 'bones'],
+		"on_kill": ['eye', 'bones', 'ant'],
 		"spawn_y": 148,
 		"target_positions": {1: Vector2(129, 148), 2: Vector2(522, 148)},
 		"angry_positions": {1: Vector2(136, 151), 2: Vector2(507, 151)},
@@ -371,4 +371,3 @@ func _remove_enemy(window_id):
 		active_bubbles[window_id].queue_free()
 	active_enemies.erase(window_id)
 	active_bubbles.erase(window_id)
-
