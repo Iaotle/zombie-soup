@@ -18,7 +18,8 @@ signal food_spawned
 func _ready() -> void:
 	brain_broth.init_receipe("BrainBonesBroth", 5, ["Brain", "Bone"]);
 	eye_soup.init_receipe("EyeSoup", 2, ["Eye", "Ant"]);
-	emit_signal("content_added");
+	#emit_signal("content_added");
+	$CookingTimer.hide()
 	sprite.play("default");
 
 func content_check():

@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 @export var content : String = "Undefined"
-@export var bullet_price : int = 2
+@export var bullet_price : int = 1
 @export var can_double_click : bool = true
 var mouse_in : bool = false
 signal clicked
