@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvepka5r0hpia"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3linv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[node name="SpiralBlood" type="GPUParticles2D"]
+amount = 100
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_3linv")
