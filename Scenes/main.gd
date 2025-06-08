@@ -192,10 +192,19 @@ func _input(event):
 			var data = active_enemies[window_id]
 			var sprite = data["sprite"]
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
-				$Shotgun.put_down_shotgun()
 				var text = $Player/bullet_ui/HBoxContainer/TextureRect/Label.text;
-				# subtract 1 from the text
 				var bullets = int(text) - 1
+				if bullets < 0:
+					print("No bullets left!")
+					# play sound for no bullets
+					var trigger_click = AudioStreamPlayer.new()
+					trigger_click.stream = preload("res://gun_empty.mp3")
+					get_tree().current_scene.add_child(trigger_click)
+					trigger_click.play()
+					trigger_click.connect("finished", trigger_click.queue_free)
+					return
+				
+				$Shotgun.put_down_shotgun()
 				$Player/bullet_ui/HBoxContainer/TextureRect/Label.text = str(bullets)
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
