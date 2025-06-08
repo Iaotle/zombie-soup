@@ -8,6 +8,7 @@ radius = 11.0
 height = 30.0
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["pickable"]]
+input_pickable = true
 script = ExtResource("1_78wkd")
 
 [node name="Bowl" type="Sprite2D" parent="."]
@@ -19,3 +20,6 @@ centered = false
 position = Vector2(25, 31)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_78wkd")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

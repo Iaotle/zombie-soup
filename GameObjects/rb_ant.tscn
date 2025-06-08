@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2cxeuv7di4ay"]
+
+[ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_p7knj"]
+
+[node name="RbAnt" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p7knj")
+
+[node name="Area2D" type="Area2D" parent="."]
