@@ -83,6 +83,8 @@ func spawn_enemy(window_id):
 		"current_ingredient": ""
 	}
 	print("Spawned %s in window %d" % [def["name"], window_id])
+# TODO: make shotty shoot out the bottles
+# TODO: put a glow on the lightbulb
 func _create_chat_bubble(enemy_sprite, ingredient_name):
 	var chat_bubble = Sprite2D.new()
 	chat_bubble.z_index = 1
