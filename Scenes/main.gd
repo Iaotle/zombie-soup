@@ -131,9 +131,12 @@ func _unhandled_input(event):
 			held_object.drop(Input.get_last_mouse_velocity())
 			held_object = null
 
-func _on_pot_food_spawned() -> void:
+func update_pickables() -> void:
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.clicked.connect(_on_pickable_clicked)
+
+func _on_pot_food_spawned() -> void:
+	update_pickables()
 
 func _on_drop_area_1_mouse_entered() -> void:
 	if held_object:
@@ -162,8 +165,8 @@ func satisfied(index : int):
 		temp.z_index = 3
 		temp.position = Vector2(100, 100)
 		add_child(temp)
-		print("[!] bullet added")
 		bullet_spawn.emit()
+	update_pickables();
 	held_object.queue_free();
 	
 func spawn_organs(window_id : int):
@@ -186,6 +189,7 @@ func spawn_organs(window_id : int):
 		temp.z_index = 3;
 		add_child(temp);
 		organ_spawn.emit(temp.content)
+	update_pickables()
 
 func _on_delayed_spawn():
 	spawn_enemy(2)
