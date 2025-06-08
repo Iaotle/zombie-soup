@@ -58,3 +58,6 @@ motion_mirroring = Vector2(640, 0)
 scale = Vector2(0.592593, 0.72)
 texture = ExtResource("5_oukyj")
 centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+color = Color(0.109804, 1, 1, 1)

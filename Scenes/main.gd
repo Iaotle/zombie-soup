@@ -36,6 +36,68 @@ var ENEMY_DEFS = [
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
 		"angry_sound": preload("res://zombie_mad.mp3"),
 		"is_angry": false
+	},
+    {
+		"name": "mutant",
+		"calm_texture": preload("res://Sprites/mutant.png"),
+		"angry_texture": preload("res://Sprites/mutant_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['bones', 'ant', 'eye'],
+		"on_kill": ['bones', 'brain'],
+		"spawn_y": 136,
+		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
+		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
+		"angry_sound": preload("res://zombie_mad.mp3"),
+		"is_angry": false
+	},
+	{
+		"name": "snake",
+		"calm_texture": preload("res://Sprites/snake.png"),
+		"angry_texture": preload("res://Sprites/snake_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['eye'],
+		"spawn_y": 158,
+		"target_positions": {1: Vector2(135, 158), 2: Vector2(515, 158)},
+		"angry_positions": {1: Vector2(127, 158), 2: Vector2(519, 158)},
+		"angry_sound": preload("res://zombie_mad.mp3")
+	},
+	{
+		"name": "dog",
+		"calm_texture": preload("res://Sprites/dog.png"),
+		"angry_texture": preload("res://Sprites/dog_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['bones'],
+		"spawn_y": 160,
+		"target_positions": {1: Vector2(160, 160), 2: Vector2(480, 160)},
+		"angry_positions": {1: Vector2(150, 180), 2: Vector2(490, 180)},
+		"angry_sound": preload("res://zombie_mad.mp3")
+	},
+	{
+		"name": "scorpion",
+		"calm_texture": preload("res://Sprites/scorpion_ugly.png"),
+		"angry_texture": preload("res://Sprites/scorpion_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['eye'],
+		"spawn_y": 170,
+		"target_positions": {1: Vector2(170, 170), 2: Vector2(460, 170)},
+		"angry_positions": {1: Vector2(160, 190), 2: Vector2(470, 190)},
+		"angry_sound": preload("res://zombie_mad.mp3")
+	},
+	{
+		"name": "yeti",
+		"calm_texture": preload("res://Sprites/yeti.png"),
+		"angry_texture": preload("res://Sprites/yeti_mad.png"),
+		"calm_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.1, 0.1),
+		"ingredients": ['eye'],
+		"spawn_y": 180,
+		"target_positions": {1: Vector2(160, 160), 2: Vector2(500, 160)},
+		"angry_positions": {1: Vector2(170, 200), 2: Vector2(450, 200)},
+		"angry_sound": preload("res://zombie_mad.mp3")
 	}
 ]
 
