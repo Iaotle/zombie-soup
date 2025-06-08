@@ -5,7 +5,7 @@ var bowl = preload("res://Scenes/bowl.tscn")
 
 var brain_broth = Recipe.new()
 var eye_soup 	= Recipe.new()
-var contents : Array[String] = ["Brain", "Bone"]
+var contents : Array[String] = []
 
 var has_eye 	= false;
 var has_brain 	= false;

@@ -11,7 +11,8 @@ height = 20.0
 input_pickable = true
 mass = 50.0
 script = ExtResource("1_c7rbp")
-content = "Ant"
+content = "ant"
+bullet_price = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.015, 0.015)

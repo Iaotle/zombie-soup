@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-@export var content : String = "Undefined"
-@export var bullet_price : int = 2
+@export var content : String = "bullet"
+@export var bullet_price : int = 0
 var mouse_in : bool = false
 signal clicked
 
@@ -14,17 +14,16 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
 		clicked.emit(self)
-		print(content)
-		
-func _physics_process(delta):
-	if held:
-		global_transform.origin = get_global_mouse_position()
-		
-func pickup():
-	if held:
-		return
-	freeze = true
-	held = true
+
+#func _physics_process(delta):
+	#if held:
+		#global_transform.origin = get_global_mouse_position()
+		#
+#func pickup():
+	#if held:
+		#return
+	#freeze = true
+	#held = true
 
 func drop(impulse=Vector2.ZERO):
 	if held:

@@ -10,7 +10,7 @@ height = 32.0
 input_pickable = true
 mass = 50.0
 script = ExtResource("1_ataot")
-content = "Bone"
+content = "bones"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)

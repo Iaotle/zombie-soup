@@ -10,7 +10,7 @@ radius = 6.0
 input_pickable = true
 mass = 50.0
 script = ExtResource("1_ai1nk")
-content = "Eye"
+content = "eye"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

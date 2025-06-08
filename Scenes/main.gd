@@ -1,19 +1,27 @@
 extends Node2D
+
+@export var bullet : PackedScene
+@export var eye : PackedScene
+@export var brains : PackedScene
+@export var bones : PackedScene
+
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
-	# {
-	# 	"name": "zombie",
-	# 	"calm_texture": preload("res://Sprites/zombie.png"),
-	# 	"angry_texture": preload("res://Sprites/zombie_mad.png"),
-	# 	"calm_scale": Vector2(0.13, 0.13),
-	# 	"angry_scale": Vector2(0.139, 0.139),
-	# 	"ingredients": ['eye', 'brains', 'heart'],
-	# 	"spawn_y": 142,
-	# 	"target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
-	# 	"angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 161)},
-	# 	"angry_sound": preload("res://zombie_mad.mp3")
-	# },
+	 {
+	 	"name": "zombie",
+	 	"calm_texture": preload("res://Sprites/zombie.png"),
+	 	"angry_texture": preload("res://Sprites/zombie_mad.png"),
+	 	"calm_scale": Vector2(0.13, 0.13),
+	 	"angry_scale": Vector2(0.139, 0.139),
+	 	"ingredients": ['eye', 'brains'],
+		"on_kill": ['eye', 'bones'],
+	 	"spawn_y": 142,
+	 	"target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
+	 	"angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 161)},
+	 	"angry_sound": preload("res://zombie_mad.mp3"),
+		"is_angry": false
+	 },
 	# same but for mutant:
 	{
 		"name": "mutant",
@@ -21,16 +29,17 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/mutant_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['bones', 'ant'],
+		"ingredients": ['bones', 'ant', 'eye'],
+		"on_kill": ['bones', 'brain'],
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
-		"angry_sound": preload("res://zombie_mad.mp3")
+		"angry_sound": preload("res://zombie_mad.mp3"),
+		"is_angry": false
 	}
 ]
 
 var active_bubbles := {}
-
 # Tracks active enemies by window (1 or 2)
 var active_enemies := {}
 
@@ -48,7 +57,6 @@ func _ready():
 	spawn_timer.connect("timeout", Callable(self, "_on_delayed_spawn"))
 	spawn_timer.start(5)
 
-
 func _on_pickable_clicked(object):
 	if !held_object:
 		object.pickup()
@@ -59,6 +67,59 @@ func _unhandled_input(event):
 		if held_object and !event.pressed:
 			held_object.drop(Input.get_last_mouse_velocity())
 			held_object = null
+
+func _on_pot_food_spawned() -> void:
+	for node in get_tree().get_nodes_in_group("pickable"):
+		node.clicked.connect(_on_pickable_clicked)
+		print(node)
+
+func _on_drop_area_1_mouse_entered() -> void:
+	if held_object:
+		print("[AREA 1]: ", held_object.content)
+		if active_enemies[1] and active_enemies[1].state != "angry":
+			if active_enemies[1].current_ingredient == held_object.content:
+				satisfied(1)
+			else:
+				_become_angry(1)
+
+func _on_drop_area_2_mouse_entered() -> void:
+	if held_object:
+		print("[AREA 2]: ", held_object.content)
+		if active_enemies[2] and active_enemies[2].state != "angry":
+			if active_enemies[2].current_ingredient == held_object.content:
+				satisfied(2)
+			else:
+				_become_angry(2)
+
+func satisfied(index : int):
+	_remove_enemy(index);
+	for i in range(0, held_object.bullet_price):
+		var temp = bullet.instantiate()
+		temp.z_index = 3
+		temp.position = Vector2(100, 100)
+		add_child(temp)
+		print("[!] bullet added")
+	held_object.queue_free();
+	
+func spawn_organs(window_id : int):
+	var enemy = active_enemies[window_id]["name"]
+	var data = ENEMY_DEFS[enemy]["on_kill"]
+	print(data)
+	#for i in active_enemies[window_id].on_kill:
+		#var temp
+		#match i:
+			#"eye":
+				#temp = eye.instantiate()
+			#"brains":
+				#temp = brains.instantiate()
+			#"bones":
+				#temp = bones.instantiate()
+		#if (window_id == 1):
+			#temp.position = Vector2(120, 100);
+		#else:
+			#temp.position = Vector2(400, 100);
+		#temp.z_index = 3;
+		#add_child(temp);
 
 func _on_delayed_spawn():
 	spawn_enemy(2)
@@ -208,6 +269,7 @@ func _input(event):
 				$Player/bullet_ui/HBoxContainer/TextureRect/Label.text = str(bullets)
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
+				spawn_organs(window_id)
 				_remove_enemy(window_id)
 				spawn_enemy(window_id)
 				$Shotgun._fire_shotgun()
@@ -248,8 +310,3 @@ func game_over():
 	var center = get_viewport_rect().size / 2
 	label.position = center - (label.get_size() / 2)
 	add_child(label)
-
-func _on_pot_food_spawned() -> void:
-	for node in get_tree().get_nodes_in_group("pickable"):
-		node.clicked.connect(_on_pickable_clicked)
-		print(node)

@@ -12,6 +12,7 @@ var crosshair = preload("res://Sprites/crosshair.png")
 func _ready():
 	set_process_input(true)
 
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not picked_up and is_pixel_opaque(get_local_mouse_position()) and !camera.in_bar:
@@ -35,6 +36,7 @@ func _pickup_shotgun():
 	Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(24, 24))
 
 	pov_sprite = Sprite2D.new()
+	pov_sprite.z_index = 4
 	pov_sprite.texture = load(pov_sprite_path)
 	pov_sprite.scale = Vector2(0.3, 0.3) # Adjust scale as needed
 	var viewport_size = get_viewport().get_visible_rect().size

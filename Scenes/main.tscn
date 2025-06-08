@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=17 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://cn6ruatx3kkyc" path="res://Sprites/bg/tt.png" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://bp6dwgsan277g" path="res://GameObjects/rb_bullet.tscn" id="2_jkdf5"]
 [ext_resource type="AudioStream" uid="uid://csr6aqjrxua5" path="res://inside-old-train-169418.mp3" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://chube24h7y0h" path="res://Scenes/camera_2d.gd" id="4_21xkr"]
 [ext_resource type="AudioStream" uid="uid://b6awofdhr2op0" path="res://drinking-glasses-contact-clink-7172.mp3" id="4_jjvhh"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
+[ext_resource type="PackedScene" uid="uid://bubls8i4kjgnd" path="res://Scenes/drop_area.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
@@ -21,6 +23,7 @@ size = Vector2(316, 115)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1ilt")
+bullet = ExtResource("2_jkdf5")
 
 [node name="Parallax" parent="." instance=ExtResource("1_bo1nx")]
 
@@ -118,7 +121,15 @@ position = Vector2(695, 159)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_fdnlq")
 
+[node name="DropArea" parent="." instance=ExtResource("12_fdnlq")]
+position = Vector2(27, 16)
+
+[node name="DropArea2" parent="." instance=ExtResource("12_fdnlq")]
+position = Vector2(395, 16)
+
 [connection signal="inventory_spawn" from="Player/InventoryUi" to="." method="_on_pot_food_spawned"]
 [connection signal="food_spawned" from="Pot" to="." method="_on_pot_food_spawned"]
+[connection signal="mouse_entered" from="DropArea" to="." method="_on_drop_area_1_mouse_entered"]
+[connection signal="mouse_entered" from="DropArea2" to="." method="_on_drop_area_2_mouse_entered"]
 
 [editable path="Player"]
