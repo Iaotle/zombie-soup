@@ -13,6 +13,7 @@ var has_bone 	= false;
 var has_ant 	= false;
 
 signal content_added
+signal food_spawned
 
 func _ready() -> void:
 	brain_broth.init_receipe("BrainBonesBroth", 5, ["Brain", "Bone"]);
@@ -44,8 +45,8 @@ func content_check():
 func spawn_bowl(content : String):
 	var food = bowl.instantiate()
 	food.content = content
-	print("[POT]", content)
 	add_child(food)
+	emit_signal("food_spawned")
 	
 func _on_food_cooked():
 	content_check()

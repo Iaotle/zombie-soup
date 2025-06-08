@@ -34,6 +34,9 @@ var active_bubbles := {}
 # Tracks active enemies by window (1 or 2)
 var active_enemies := {}
 
+#drag and drop mechanic
+var held_object = null
+
 func _ready():
 	randomize()
 	# Spawn one enemy in window 1 immediately.
@@ -44,6 +47,18 @@ func _ready():
 	add_child(spawn_timer)
 	spawn_timer.connect("timeout", Callable(self, "_on_delayed_spawn"))
 	spawn_timer.start(5)
+
+
+func _on_pickable_clicked(object):
+	if !held_object:
+		object.pickup()
+		held_object = object
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if held_object and !event.pressed:
+			held_object.drop(Input.get_last_mouse_velocity())
+			held_object = null
 
 func _on_delayed_spawn():
 	spawn_enemy(2)
@@ -218,3 +233,8 @@ func game_over():
 	var center = get_viewport_rect().size / 2
 	label.position = center - (label.get_size() / 2)
 	add_child(label)
+
+func _on_pot_food_spawned() -> void:
+	for node in get_tree().get_nodes_in_group("pickable"):
+		node.clicked.connect(_on_pickable_clicked)
+		print(node)

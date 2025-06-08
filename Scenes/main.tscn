@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=15 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -9,9 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
-[ext_resource type="PackedScene" path="res://Scenes/pot.tscn" id="11_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
+size = Vector2(639, 83.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdnlq"]
+size = Vector2(316, 115)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1ilt")
@@ -65,5 +71,35 @@ position = Vector2(492, 145)
 stream = ExtResource("12_6iyac")
 volume_db = -2.0
 autoplay = true
+
+[node name="collision" type="Node2D" parent="."]
+
+[node name="counter" type="StaticBody2D" parent="collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision/counter"]
+position = Vector2(319, 350.5)
+shape = SubResource("RectangleShape2D_6iyac")
+
+[node name="ceilling" type="StaticBody2D" parent="collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision/ceilling"]
+position = Vector2(321.5, -26.75)
+shape = SubResource("RectangleShape2D_6iyac")
+
+[node name="wall_left" type="StaticBody2D" parent="collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision/wall_left"]
+position = Vector2(-56, 159)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fdnlq")
+
+[node name="wall_right" type="StaticBody2D" parent="collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision/wall_right"]
+position = Vector2(695, 159)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fdnlq")
+
+[connection signal="food_spawned" from="Pot" to="." method="_on_pot_food_spawned"]
 
 [editable path="Player"]

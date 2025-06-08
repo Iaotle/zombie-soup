@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c72n2kdgov1d1"]
+[gd_scene load_steps=4 format=3 uid="uid://c72n2kdgov1d1"]
 
+[ext_resource type="Script" uid="uid://c5dsg0yxj8ofe" path="res://src/bowl.gd" id="1_78wkd"]
 [ext_resource type="Texture2D" uid="uid://cw0h64v2sotr0" path="res://Sprites/bowl.png" id="1_mdowk"]
-[ext_resource type="Script" uid="uid://yrntkav6b3j5" path="res://Scenes/bowl.gd" id="2_78wkd"]
 
-[node name="Bowl" type="Sprite2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78wkd"]
+radius = 11.0
+height = 30.0
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["pickable"]]
+script = ExtResource("1_78wkd")
+
+[node name="Bowl" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_mdowk")
 centered = false
-script = ExtResource("2_78wkd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25, 31)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_78wkd")
