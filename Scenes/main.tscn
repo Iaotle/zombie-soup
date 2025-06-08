@@ -67,6 +67,7 @@ position = Vector2(320, 180)
 script = ExtResource("4_21xkr")
 
 [node name="SignMouseDown" type="Sprite2D" parent="Camera2D"]
+z_index = 1000
 position = Vector2(271, 91)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("18_b3802")
