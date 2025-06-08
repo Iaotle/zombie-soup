@@ -29,6 +29,8 @@ var ENEMY_DEFS = [
 	}
 ]
 
+var active_bubbles := {}
+
 # Tracks active enemies by window (1 or 2)
 var active_enemies := {}
 
@@ -85,12 +87,13 @@ func spawn_enemy(window_id):
 	print("Spawned %s in window %d" % [def["name"], window_id])
 # TODO: make shotty shoot out the bottles
 # TODO: put a glow on the lightbulb
-func _create_chat_bubble(enemy_sprite, ingredient_name):
+func _create_chat_bubble(ingredient_name: String, window_id: int):
 	var chat_bubble = Sprite2D.new()
 	chat_bubble.z_index = 1
 	chat_bubble.texture = preload("res://Sprites/chat.png")
-	chat_bubble.scale = Vector2(0.5, 0.5)
+	chat_bubble.scale = Vector2(0.1, 0.1)
 	chat_bubble.position = Vector2(0, 0)
+	chat_bubble.position = Vector2(230, 90) if window_id == 1 else Vector2(584, 90)
 	
 	var ingredient_sprite = Sprite2D.new()
 	ingredient_sprite.texture = load("res://Sprites/%s.png" % ingredient_name)
@@ -99,10 +102,14 @@ func _create_chat_bubble(enemy_sprite, ingredient_name):
 	var scale_ratio = min((bubble_size.x * 0.8) / ingredient_size.x, (bubble_size.y * 0.5) / ingredient_size.y)
 	ingredient_sprite.scale = Vector2.ONE * scale_ratio
 	# the chat bubble has a tail, which means we need to position the ingredient sprite slightly above the center of the bubble
-	ingredient_sprite.position = Vector2((bubble_size.x - ingredient_size.x * scale_ratio) / 2, -ingredient_size.y * scale_ratio * 0.5)
+	ingredient_sprite.translate(Vector2(0, -50))
 	chat_bubble.add_child(ingredient_sprite)
 
-	enemy_sprite.add_child(chat_bubble)
+	# get root:
+	var root = get_tree().get_root()
+
+	root.add_child(chat_bubble)
+	active_bubbles[window_id] = chat_bubble
 
 func _process(delta):
 	for window_id in active_enemies.keys():
@@ -119,7 +126,7 @@ func _process(delta):
 					data["current_ingredient"] = def["ingredients"][randi() % def["ingredients"].size()]
 					print("%s arrived at window %d, demand: %s" % [def["name"], window_id, data["current_ingredient"]])
 					# create res://Sprites/chat.png bubble, position it above the sprite. Put res://Sprites/{ingredient}.png inside it.
-					_create_chat_bubble(sprite, data["current_ingredient"])
+					_create_chat_bubble(data["current_ingredient"], window_id)
 					data["demand_timer"].start(5)
 			"angry":
 				pass
@@ -147,9 +154,13 @@ func _become_angry(window_id):
 	sprite.texture = def["angry_texture"]
 	sprite.scale = def["angry_scale"]
 	sprite.position = def["angry_positions"][window_id]
-	# Play angry sound
+	# Play angry sound with stereo panning
 	var snd = AudioStreamPlayer2D.new()
 	snd.stream = def["angry_sound"]
+	var screen_size = get_viewport_rect().size
+	# 0.3 * width for left, 0.7 * width for right
+	snd.position.x = screen_size.x * (0 if window_id == 1 else 1)
+	snd.position.y = screen_size.y / 2
 	add_child(snd)
 	snd.play()
 	print("%s is angry at window %d!" % [def["name"], window_id])
@@ -162,10 +173,15 @@ func _input(event):
 			var sprite = data["sprite"]
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
 				$Shotgun.put_down_shotgun()
+				var text = $Player/bullet_ui/HBoxContainer/TextureRect/Label.text;
+				# subtract 1 from the text
+				var bullets = int(text) - 1
+				$Player/bullet_ui/HBoxContainer/TextureRect/Label.text = str(bullets)
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
 				_remove_enemy(window_id)
 				spawn_enemy(window_id)
+				$Shotgun._fire_shotgun()
 				return
 
 func _on_angry_timeout(window_id):
@@ -190,7 +206,10 @@ func _remove_enemy(window_id):
 	data["sprite"].queue_free()
 	data["demand_timer"].queue_free()
 	data["angry_timer"].queue_free()
+	if active_bubbles.has(window_id):
+		active_bubbles[window_id].queue_free()
 	active_enemies.erase(window_id)
+	active_bubbles.erase(window_id)
 
 func game_over():
 	var label = Label.new()

@@ -16,9 +16,9 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not picked_up and is_pixel_opaque(get_local_mouse_position()) and !camera.in_bar:
 			_pickup_shotgun()
-		elif picked_up:
-			# TODO: detect if the click is on an object in group 'enemies'
-			_fire_shotgun()
+		# elif picked_up:
+		# 	# TODO: detect if the click is on an object in group 'enemies'
+		# 	_fire_shotgun()
 
 func put_down_shotgun():
 	if picked_up:
