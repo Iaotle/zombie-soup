@@ -24,13 +24,6 @@ texture = ExtResource("1_brbew")
 expand_mode = 4
 script = ExtResource("2_6o8f3")
 
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Ants"]
-visible = false
-position = Vector2(1, 10)
-scale = Vector2(0.02, 0.02)
-texture = ExtResource("1_brbew")
-centered = false
-
 [node name="Label" type="Label" parent="HBoxContainer/Ants"]
 layout_mode = 0
 offset_left = 36.0
@@ -44,12 +37,6 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("2_7oojl")
 expand_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Eyes"]
-visible = false
-position = Vector2(1, 10)
-texture = ExtResource("2_7oojl")
-centered = false
 
 [node name="Label" type="Label" parent="HBoxContainer/Eyes"]
 layout_mode = 0
@@ -65,13 +52,6 @@ layout_mode = 2
 texture = ExtResource("3_6o8f3")
 expand_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Brains"]
-visible = false
-position = Vector2(1, 10)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_6o8f3")
-centered = false
-
 [node name="Label" type="Label" parent="HBoxContainer/Brains"]
 layout_mode = 0
 offset_left = 42.0
@@ -85,13 +65,6 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("4_m65me")
 expand_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Bones"]
-visible = false
-position = Vector2(1, 10)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_m65me")
-centered = false
 
 [node name="Label" type="Label" parent="HBoxContainer/Bones"]
 layout_mode = 0

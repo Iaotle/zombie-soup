@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
-[ext_resource type="PackedScene" path="res://Scenes/pot.tscn" id="11_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
