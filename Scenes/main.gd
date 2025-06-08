@@ -94,11 +94,12 @@ func _create_chat_bubble(enemy_sprite, ingredient_name):
 	
 	var ingredient_sprite = Sprite2D.new()
 	ingredient_sprite.texture = load("res://Sprites/%s.png" % ingredient_name)
-	# ingredient_sprite.position = chat_bubble.texture.get_size() * 0.5
 	var bubble_size = chat_bubble.texture.get_size()
 	var ingredient_size = ingredient_sprite.texture.get_size()
 	var scale_ratio = min((bubble_size.x * 0.8) / ingredient_size.x, (bubble_size.y * 0.5) / ingredient_size.y)
 	ingredient_sprite.scale = Vector2.ONE * scale_ratio
+	# the chat bubble has a tail, which means we need to position the ingredient sprite slightly above the center of the bubble
+	ingredient_sprite.position = Vector2((bubble_size.x - ingredient_size.x * scale_ratio) / 2, -ingredient_size.y * scale_ratio * 0.5)
 	chat_bubble.add_child(ingredient_sprite)
 
 	enemy_sprite.add_child(chat_bubble)
