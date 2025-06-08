@@ -325,7 +325,7 @@ func _input(event):
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
 				$Player/bullet_ui.update_count(-1)
 				var bullets = $Player/bullet_ui.bullet_count
-				if bullets < 0:
+				if bullets == 0:
 					print("No bullets left!")
 					# play sound for no bullets
 					var trigger_click = AudioStreamPlayer.new()
@@ -372,10 +372,3 @@ func _remove_enemy(window_id):
 	active_enemies.erase(window_id)
 	active_bubbles.erase(window_id)
 
-func game_over():
-	var label = Label.new()
-	label.text = "Game Over"
-	label.modulate = Color.RED
-	var center = get_viewport_rect().size / 2
-	label.position = center - (label.get_size() / 2)
-	add_child(label)
