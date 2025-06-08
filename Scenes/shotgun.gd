@@ -14,8 +14,10 @@ func _ready():
 
 
 func _input(event):
+	if !camera.in_bar:
+		put_down_shotgun()
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not picked_up and is_pixel_opaque(get_local_mouse_position()):
+		if not picked_up and is_pixel_opaque(get_local_mouse_position()) and camera.in_bar:
 			_pickup_shotgun()
 		# elif picked_up:
 		# 	# TODO: detect if the click is on an object in group 'enemies'
@@ -26,6 +28,7 @@ func _input(event):
 		if picked_up:
 			put_down_shotgun()
 	# TODO: maybe make items not pickable
+	# TODO: shoot ants with shotgun, kills all the ants instantly (or an area) (also fix the sprite) (crosshair becomes bigger etc)
 
 func put_down_shotgun():
 	if picked_up:
