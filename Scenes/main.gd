@@ -102,8 +102,8 @@ func satisfied(index : int):
 	held_object.queue_free();
 	
 func spawn_organs(window_id : int):
-	var enemy = active_enemies[window_id]["name"]
-	var data = ENEMY_DEFS[enemy]["on_kill"]
+	var enemy = active_enemies[window_id]["def"]
+	var data = enemy["on_kill"]
 	print(data)
 	#for i in active_enemies[window_id].on_kill:
 		#var temp
