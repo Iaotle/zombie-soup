@@ -11,10 +11,11 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("main"):
 		node.bullet_spawn.connect(_on_bullet_picked)
 	
-func update_count(i : int):
+func update_count(i: int):
 	bullet_count += i
+	bullet_count = max(bullet_count, 0)
 	print("[BULL] " ,bullet_count)
-	label.text = str(178)
+	label.text = 'qwer' + str(bullet_count)
 
 func _on_bullet_picked():
 	update_count(1)

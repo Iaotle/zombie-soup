@@ -155,6 +155,8 @@ func _on_drop_area_2_mouse_entered() -> void:
 
 func satisfied(index : int):
 	_remove_enemy(index);
+	spawn_enemy(index)
+	
 	for i in range(0, held_object.bullet_price):
 		var temp = bullet.instantiate()
 		temp.z_index = 3
@@ -317,8 +319,8 @@ func _input(event):
 			var data = active_enemies[window_id]
 			var sprite = data["sprite"]
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
-				var text = $Player/bullet_ui/HBoxContainer/TextureRect/Label.text;
-				var bullets = int(text) - 1
+				$Player/bullet_ui.update_count(-1)
+				var bullets = $Player/bullet_ui.bullet_count
 				if bullets < 0:
 					print("No bullets left!")
 					# play sound for no bullets
@@ -330,7 +332,6 @@ func _input(event):
 					return
 				
 				$Shotgun.put_down_shotgun()
-				$Player/bullet_ui/HBoxContainer/TextureRect/Label.text = str(bullets)
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
 				spawn_organs(window_id)
