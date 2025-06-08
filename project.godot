@@ -27,6 +27,10 @@ mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 enemies=""
 
+[gui]
+
+theme/custom_font="uid://bk73s4kakbl1h"
+
 [input]
 
 scroll_up={
