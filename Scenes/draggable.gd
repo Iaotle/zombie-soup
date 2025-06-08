@@ -1,8 +1,17 @@
 extends TextureRect
 @onready var root = $"../.."
+@export var rigid_body : PackedScene
+signal cookable_added
+var mouse_in : bool = false
 
-func _get_drag_data(at_position: Vector2) -> Variant:
-	var data = "ant"
-	var preview = null
-	set_drag_preview(preview)
-	return data
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_click") and mouse_in:
+		var obj = rigid_body.instantiate()
+		add_child(obj)
+		emit_signal("cookable_added")
+		
+func _on_mouse_entered() -> void:
+	mouse_in = true
+
+func _on_mouse_exited() -> void:
+	mouse_in = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3tkgdxbtxl8r"]
+[gd_scene load_steps=8 format=3 uid="uid://c3tkgdxbtxl8r"]
 
 [ext_resource type="Script" uid="uid://dvsi3wfaurdqk" path="res://Scenes/inventory_ui.gd" id="1_7oojl"]
 [ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_brbew"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://denaculunq3vk" path="res://Sprites/eye.png" id="2_7oojl"]
 [ext_resource type="Texture2D" uid="uid://kx8im43q30lu" path="res://Sprites/brains.png" id="3_6o8f3"]
 [ext_resource type="Texture2D" uid="uid://b2td8q16yoyur" path="res://Sprites/bones.png" id="4_m65me"]
+[ext_resource type="PackedScene" uid="uid://c2cxeuv7di4ay" path="res://GameObjects/rb_ant.tscn" id="4_ota2j"]
 
 [node name="InventoryUi" type="CanvasLayer"]
 script = ExtResource("1_7oojl")
@@ -23,6 +24,7 @@ layout_mode = 2
 texture = ExtResource("1_brbew")
 expand_mode = 4
 script = ExtResource("2_6o8f3")
+rigid_body = ExtResource("4_ota2j")
 
 [node name="Label" type="Label" parent="HBoxContainer/Ants"]
 layout_mode = 0
@@ -73,3 +75,6 @@ offset_top = 30.0
 offset_right = 67.0
 offset_bottom = 53.0
 text = "0"
+
+[connection signal="mouse_entered" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_exited"]

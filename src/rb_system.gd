@@ -8,7 +8,6 @@ var held = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
-		print("[bowl] clicked")
 		clicked.emit(self)
 		
 func _physics_process(delta):
