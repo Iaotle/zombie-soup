@@ -81,7 +81,7 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/yeti_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['bones', 'brain', 'eye', 'ant'],
+		"ingredients": ['bones', 'brains', 'eye', 'ant'],
 		"on_kill": ['brains', 'bones'],
 		"spawn_y": 133,
 		"target_positions": {1: Vector2(126, 133), 2: Vector2(525, 133)},
