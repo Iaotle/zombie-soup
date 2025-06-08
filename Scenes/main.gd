@@ -110,6 +110,10 @@ var active_enemies := {}
 #drag and drop mechanic
 var held_object = null
 
+func set_held_object(obj : RigidBody2D):
+	held_object = obj
+	print(held_object)
+
 func _ready():
 	randomize()
 	# Spawn one enemy in window 1 immediately.
@@ -151,7 +155,7 @@ func _on_drop_area_1_mouse_entered() -> void:
 func _on_drop_area_2_mouse_entered() -> void:
 	if held_object:
 		print("[AREA 2]: ", held_object.content)
-		if active_enemies[2] and active_enemies[2].state != "angry":
+		if active_enemies.size() == 2 and active_enemies[2] and active_enemies[2].state != "angry":
 			if active_enemies[2].current_ingredient == held_object.content:
 				satisfied(2)
 			else:

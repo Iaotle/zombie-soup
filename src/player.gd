@@ -27,7 +27,9 @@ func game_over():
 	label.modulate = Color.RED
 	var center = get_viewport_rect().size / 2
 	label.position = center - (label.get_size() / 2)
+	label.z_index = 5
 	add_child(label)
+	
 	var timer = Timer.new()
 	timer.wait_time = 5.0  # Set the timer to 5 seconds
 	timer.one_shot = true  # Make the timer one-shot

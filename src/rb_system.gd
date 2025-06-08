@@ -14,7 +14,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
-		print("[CLICK] ", content)
 		clicked.emit(self)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click and mouse_in and can_double_click:
