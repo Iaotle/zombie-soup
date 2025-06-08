@@ -11,6 +11,7 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("scroll_down") and in_bar and not is_moving:
+		$SignMouseDown.hide()
 		in_bar = false
 		target_position = position + Vector2(0, get_viewport_rect().size.y - y_offset)
 		is_moving = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=21 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bubls8i4kjgnd" path="res://Scenes/drop_area.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://naetmu6f1mya" path="res://Sprites/sign_mouse_down.png" id="18_b3802"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(639, 83.5)
@@ -62,6 +63,11 @@ position = Vector2(0, 303)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 180)
 script = ExtResource("4_21xkr")
+
+[node name="SignMouseDown" type="Sprite2D" parent="Camera2D"]
+position = Vector2(271, 91)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("18_b3802")
 
 [node name="Train_audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_8gbba")
