@@ -2,18 +2,18 @@ extends Node2D
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
-	# {
-	#     "name": "zombie",
-	#     "calm_texture": preload("res://Sprites/zombie.png"),
-	#     "angry_texture": preload("res://Sprites/zombie_mad.png"),
-	#     "calm_scale": Vector2(0.13, 0.13),
-	#     "angry_scale": Vector2(0.139, 0.139),
-	#     "ingredients": ['eye', 'brains', 'heart'],
-	#     "spawn_y": 142,
-	#     "target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
-	#     "angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 160)},
-	#     "angry_sound": preload("res://zombie_mad.mp3")
-	# },
+	{
+	    "name": "zombie",
+	    "calm_texture": preload("res://Sprites/zombie.png"),
+	    "angry_texture": preload("res://Sprites/zombie_mad.png"),
+	    "calm_scale": Vector2(0.13, 0.13),
+	    "angry_scale": Vector2(0.139, 0.139),
+	    "ingredients": ['eye', 'brains', 'heart'],
+	    "spawn_y": 142,
+	    "target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
+	    "angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 160)},
+	    "angry_sound": preload("res://zombie_mad.mp3")
+	},
 	# same but for mutant:
 	{
 		"name": "mutant",
@@ -24,7 +24,7 @@ var ENEMY_DEFS = [
 		"ingredients": ['bones', 'ant'],
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(508, 136)},
-		"angry_positions": {1: Vector2(140, 140), 2: Vector2(500, 140)},
+		"angry_positions": {1: Vector2(146, 133), 2: Vector2(511, 135)},
 		"angry_sound": preload("res://zombie_mad.mp3")
 	}
 ]
