@@ -1,17 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://cssjkv5rjo6u0"]
+[gd_scene load_steps=8 format=3 uid="uid://cssjkv5rjo6u0"]
 
 [ext_resource type="Script" uid="uid://bfdmwpulf0ift" path="res://src/pot.gd" id="1_b8ggh"]
-[ext_resource type="Texture2D" uid="uid://pr7pbd3ou5ki" path="res://Sprites/ChatGPT Image Jun 7, 2025, 08_50_28 PM.png" id="1_cc2i1"]
 [ext_resource type="PackedScene" uid="uid://hjae5xhqvxxw" path="res://Scenes/cooking_timer.tscn" id="3_rj0eo"]
+[ext_resource type="Texture2D" uid="uid://cfe00e0f3nx6s" path="res://Sprites/pot1.png" id="4_sptmv"]
 [ext_resource type="Script" uid="uid://bix3wql3rp8uq" path="res://src/drop_area.gd" id="4_tpvhl"]
+[ext_resource type="Texture2D" uid="uid://drirsc42xn8js" path="res://Sprites/pot2.png" id="5_2p6rr"]
+[ext_resource type="Texture2D" uid="uid://ckwe3q8lmrn7h" path="res://Sprites/pot3.png" id="6_5hsvb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_djkxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sptmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2p6rr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5hsvb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Pot" type="Area2D"]
 script = ExtResource("1_b8ggh")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("1_cc2i1")
-centered = false
 
 [node name="CookingTimer" parent="." instance=ExtResource("3_rj0eo")]
 position = Vector2(26, 177)
@@ -22,6 +36,13 @@ offset_top = 57.0
 offset_right = 113.0
 offset_bottom = 81.0
 script = ExtResource("4_tpvhl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_djkxd")
+frame = 1
+frame_progress = 0.417433
+centered = false
 
 [connection signal="content_added" from="." to="CookingTimer" method="_on_pot_content_added"]
 [connection signal="food_cooked" from="CookingTimer" to="." method="_on_food_cooked"]

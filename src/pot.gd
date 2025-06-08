@@ -1,5 +1,6 @@
 extends Area2D
 
+@onready var sprite = $AnimatedSprite2D
 var bowl = preload("res://Scenes/bowl.tscn")
 
 var brain_broth = Recipe.new()
@@ -17,6 +18,7 @@ func _ready() -> void:
 	brain_broth.init_receipe("BrainBonesBroth", 5, ["Brain", "Bone"]);
 	eye_soup.init_receipe("EyeSoup", 2, ["Eye", "Ant"]);
 	emit_signal("content_added");
+	sprite.play("default");
 
 func content_check():
 	for i in contents:
