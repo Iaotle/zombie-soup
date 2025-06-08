@@ -17,8 +17,17 @@ func take_damage():
 		health -= 1;
 		update_heart();
 	if health == 0:
-		pass;
+		game_over();
 		# game over here
+
+
+func game_over():
+	var label = Label.new()
+	label.text = "Game Over"
+	label.modulate = Color.RED
+	var center = get_viewport_rect().size / 2
+	label.position = center - (label.get_size() / 2)
+	add_child(label)
 		
 func update_heart():
 	for i in range(heart_list.size()):
