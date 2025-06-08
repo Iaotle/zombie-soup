@@ -7,12 +7,14 @@ var main_node
 
 func _ready() -> void:
 	label = $HBoxContainer/TextureRect/Label
+	update_count(0)
 	for node in get_tree().get_nodes_in_group("main"):
-		node.organ_spawn.connect(_on_bullet_picked)
+		node.bullet_spawn.connect(_on_bullet_picked)
 	
 func update_count(i : int):
 	bullet_count += i
-	label.text = str(bullet_count)
+	print("[BULL] " ,bullet_count)
+	label.text = str(178)
 
 func _on_bullet_picked():
 	update_count(1)

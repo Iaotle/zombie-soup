@@ -106,7 +106,6 @@ var ENEMY_DEFS = [
 var active_bubbles := {}
 # Tracks active enemies by window (1 or 2)
 var active_enemies := {}
-
 #drag and drop mechanic
 var held_object = null
 
