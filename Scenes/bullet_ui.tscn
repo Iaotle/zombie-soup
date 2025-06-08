@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dky67fqgx8fgg"]
+[gd_scene load_steps=2 format=3 uid="uid://ctd0xklujbt4j"]
 
-[ext_resource type="Texture2D" uid="uid://dhkoli1oh8q7m" path="res://Sprites/ChatGPT Image Jun 7, 2025, 08_38_30 PM.png" id="1_k4l2r"]
+[ext_resource type="Texture2D" uid="uid://3e11h2roa1dl" path="res://Sprites/shotgun_shell.png" id="1_k4l2r"]
 
 [node name="bullet_ui" type="CanvasLayer"]
 
@@ -15,8 +15,8 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/TextureRect"]
-position = Vector2(6, 13)
-scale = Vector2(0.03, 0.03)
+position = Vector2(2, 8)
+scale = Vector2(0.0459184, 0.0459184)
 texture = ExtResource("1_k4l2r")
 centered = false
 
