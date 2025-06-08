@@ -1,15 +1,14 @@
 extends TextureRect
 @onready var root = $"../.."
 @export var rigid_body : PackedScene
+@export var amount = 0
 var mouse_in : bool = false
-var amount = 0
 var main_node
 signal cookable_added
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("main"):
 		main_node = node
-	update_amount()
 
 func update_amount():
 	match name:

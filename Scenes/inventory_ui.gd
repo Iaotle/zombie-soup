@@ -23,10 +23,16 @@ func _ready() -> void:
 	brains_label 	= $HBoxContainer/Brains/Label
 	bones_label 	= $HBoxContainer/Bones/Label
 	
+	
 	ants.init_item('ants', 0);
-	eyes.init_item('eyes', 0);
-	brains.init_item('brains', 0);
-	bones.init_item('bones', 0);
+	eyes.init_item('eyes', 1);
+	brains.init_item('brains', 1);
+	bones.init_item('bones', 1);
+	
+	$HBoxContainer/Ants.update_amount()
+	$HBoxContainer/Eyes.update_amount()
+	$HBoxContainer/Brains.update_amount()
+	$HBoxContainer/Bones.update_amount()
 	
 	ants_label.text 	= str(ants.amount);
 	eyes_label.text 	= str(eyes.amount);

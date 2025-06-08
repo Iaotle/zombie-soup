@@ -44,6 +44,7 @@ texture = ExtResource("2_7oojl")
 expand_mode = 2
 script = ExtResource("2_6o8f3")
 rigid_body = ExtResource("6_g80pn")
+amount = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/Eyes"]
 layout_mode = 0
@@ -60,6 +61,7 @@ texture = ExtResource("3_6o8f3")
 expand_mode = 2
 script = ExtResource("2_6o8f3")
 rigid_body = ExtResource("8_wef62")
+amount = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/Brains"]
 layout_mode = 0
@@ -76,6 +78,7 @@ texture = ExtResource("4_m65me")
 expand_mode = 2
 script = ExtResource("2_6o8f3")
 rigid_body = ExtResource("10_50p73")
+amount = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/Bones"]
 layout_mode = 0

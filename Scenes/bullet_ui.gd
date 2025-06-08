@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 func update_count(i: int):
 	bullet_count += i
-	#bullet_count = max(bullet_count, 0)
+	bullet_count = max(bullet_count, 0)
 	print("[BULL] " ,bullet_count)
 	label.text = str(bullet_count)
 	
