@@ -4,6 +4,7 @@ extends Node2D
 @export var eye : PackedScene
 @export var brains : PackedScene
 @export var bones : PackedScene
+@export var ant : PackedScene
 signal organ_spawn
 signal bullet_spawn
 # Define your enemy types here:
@@ -181,11 +182,13 @@ func spawn_organs(window_id : int):
 				temp = brains.instantiate()
 			"bones":
 				temp = bones.instantiate()
+			"ant":
+				temp = ant.instantiate()
 		if (window_id == 1):
 			temp.position = Vector2(120, 100);
 		else:
 			temp.position = Vector2(400, 100);
-		temp.apply_central_impulse(Vector2.UP * 1.63)
+		temp.apply_central_impulse(Vector2.UP * 16.63)
 		temp.z_index = 3;
 		add_child(temp);
 		organ_spawn.emit(temp.content)
@@ -318,6 +321,12 @@ func _become_angry(window_id):
 	data["angry_timer"].start(5)
 
 func _input(event):
+	# TODO: ctrl+s to mute/unmute sound effects
+	if event.is_action_pressed("toggle_music"):
+		var music_player = get_tree().current_scene.get_node("Music")
+		if music_player:
+			music_player.playing = !music_player.playing
+		print("Music toggled: %s" % music_player.playing)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and $Shotgun.picked_up:
 		for window_id in active_enemies.keys():
 			var data = active_enemies[window_id]
