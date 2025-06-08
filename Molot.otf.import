@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bk73s4kakbl1h"
-path="res://.godot/imported/Chernobyl.otf-4a69711860e884d1d3d8e725c2bb1f76.fontdata"
+uid="uid://d23qhp10836dv"
+path="res://.godot/imported/Molot.otf-4e3f49fc22df2274e0086fb24076e769.fontdata"
 
 [deps]
 
-source_file="res://Chernobyl.otf"
-dest_files=["res://.godot/imported/Chernobyl.otf-4a69711860e884d1d3d8e725c2bb1f76.fontdata"]
+source_file="res://Molot.otf"
+dest_files=["res://.godot/imported/Molot.otf-4e3f49fc22df2274e0086fb24076e769.fontdata"]
 
 [params]
 
