@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=23 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bubls8i4kjgnd" path="res://Scenes/drop_area.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://naetmu6f1mya" path="res://Sprites/sign_mouse_down.png" id="18_b3802"]
+[ext_resource type="Texture2D" uid="uid://d3yecof00a2ji" path="res://Sprites/chat.png" id="20_hibaj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(639, 83.5)
@@ -141,6 +142,12 @@ position = Vector2(27, 16)
 
 [node name="DropArea2" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(395, 16)
+
+[node name="Chat" type="Sprite2D" parent="."]
+position = Vector2(416, 98)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("20_hibaj")
+flip_h = true
 
 [connection signal="inventory_spawn" from="Player/InventoryUi" to="." method="_on_pot_food_spawned"]
 [connection signal="food_spawned" from="Pot" to="." method="_on_pot_food_spawned"]

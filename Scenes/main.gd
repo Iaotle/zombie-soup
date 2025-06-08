@@ -90,6 +90,8 @@ var ENEMY_DEFS = [
 	}
 ]
 
+# TODO: throw or move bullets etc into the part of the screen where the UI is
+
 var active_bubbles := {}
 # Tracks active enemies by window (1 or 2)
 var active_enemies := {}
@@ -239,13 +241,16 @@ func spawn_enemy(window_id):
 	print("Spawned %s in window %d" % [def["name"], window_id])
 # TODO: make shotty shoot out the bottles
 # TODO: put a glow on the lightbulb
+# TODO: bullets should spawn in correct window
 func _create_chat_bubble(ingredient_name: String, window_id: int):
 	var chat_bubble = Sprite2D.new()
 	chat_bubble.z_index = 3
 	chat_bubble.texture = preload("res://Sprites/chat.png")
 	chat_bubble.scale = Vector2(0.1, 0.1)
 	chat_bubble.position = Vector2(0, 0)
-	chat_bubble.position = Vector2(230, 90) if window_id == 1 else Vector2(584, 90)
+	chat_bubble.position = Vector2(230, 90) if window_id == 1 else Vector2(416, 98)
+	if window_id == 2:
+		chat_bubble.flip_h = true;
 	
 	var ingredient_sprite = Sprite2D.new()
 	ingredient_sprite.texture = load("res://Sprites/%s.png" % ingredient_name)
@@ -341,7 +346,6 @@ func _input(event):
 			var data = active_enemies[window_id]
 			var sprite = data["sprite"]
 			if data["state"] == "angry" and event.position.distance_to(sprite.position) < sprite.texture.get_width() * sprite.scale.x * 0.5:
-				$Player/bullet_ui.update_count(-1)
 				var bullets = $Player/bullet_ui.bullet_count
 				if bullets == 0:
 					print("No bullets left!")
@@ -352,6 +356,7 @@ func _input(event):
 					trigger_click.play()
 					trigger_click.connect("finished", trigger_click.queue_free)
 					return
+				$Player/bullet_ui.update_count(-1)
 				
 				$Shotgun.put_down_shotgun()
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
