@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=15 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" path="res://Scenes/pot.tscn" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
-[ext_resource type="Texture2D" uid="uid://b6p60thx7a6dg" path="res://Sprites/mutant_mad.png" id="13_jkdf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(639, 83.5)
@@ -118,12 +117,6 @@ shape = SubResource("RectangleShape2D_fdnlq")
 position = Vector2(695, 159)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_fdnlq")
-
-[node name="MutantMad" type="Sprite2D" parent="collision"]
-position = Vector2(511, 133)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("13_jkdf5")
-flip_h = true
 
 [connection signal="food_spawned" from="Pot" to="." method="_on_pot_food_spawned"]
 
