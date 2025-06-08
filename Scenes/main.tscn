@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
-[ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
+[ext_resource type="PackedScene" path="res://Scenes/pot.tscn" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 
@@ -24,10 +24,28 @@ script = ExtResource("1_d1ilt")
 
 [node name="Parallax" parent="." instance=ExtResource("1_bo1nx")]
 
-[node name="train" type="Sprite2D" parent="."]
+[node name="Train" type="Sprite2D" parent="."]
 scale = Vector2(0.417318, 0.352539)
 texture = ExtResource("2_8gbba")
 centered = false
+
+[node name="TrainOverlayRight" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(538, 0)
+scale = Vector2(0.417318, 0.352539)
+texture = ExtResource("2_8gbba")
+centered = false
+region_enabled = true
+region_rect = Rect2(1288.91, 0, 247.091, 656.082)
+
+[node name="TrainOverlayLeft" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(0.417318, 0.352539)
+texture = ExtResource("2_8gbba")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 248.692, 721.704)
 
 [node name="Under The Counter" parent="." instance=ExtResource("5_kry3j")]
 position = Vector2(0, 303)
@@ -65,7 +83,7 @@ spawner = NodePath("../../Under The Counter")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Pot" parent="." instance=ExtResource("11_d1ilt")]
-position = Vector2(492, 145)
+position = Vector2(287, 136)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_6iyac")
