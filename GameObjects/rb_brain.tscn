@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bka6rl2km75ef"]
+
+[ext_resource type="Script" path="res://src/rb_system.gd" id="1_ioild"]
+[ext_resource type="Texture2D" uid="uid://kx8im43q30lu" path="res://Sprites/brains.png" id="2_ioild"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsodg"]
+radius = 7.07107
+
+[node name="RbBrain" type="RigidBody2D" groups=["pickable"]]
+input_pickable = true
+script = ExtResource("1_ioild")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ioild")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vsodg")

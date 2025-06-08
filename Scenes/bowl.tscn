@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://c72n2kdgov1d1"]
 
-[ext_resource type="Script" uid="uid://c5dsg0yxj8ofe" path="res://src/bowl.gd" id="1_78wkd"]
+[ext_resource type="Script" path="res://src/rb_system.gd" id="1_78wkd"]
 [ext_resource type="Texture2D" uid="uid://cw0h64v2sotr0" path="res://Sprites/bowl.png" id="1_mdowk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78wkd"]
 radius = 11.0
-height = 30.0
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["pickable"]]
 input_pickable = true
