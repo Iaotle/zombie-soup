@@ -85,6 +85,10 @@ offset_right = 67.0
 offset_bottom = 53.0
 text = "0"
 
+[connection signal="ant_added" from="." to="HBoxContainer/Ants" method="_on_inventory_ui_added"]
+[connection signal="organ_added" from="." to="HBoxContainer/Eyes" method="_on_inventory_ui_added"]
+[connection signal="organ_added" from="." to="HBoxContainer/Brains" method="_on_inventory_ui_added"]
+[connection signal="organ_added" from="." to="HBoxContainer/Bones" method="_on_inventory_ui_added"]
 [connection signal="cookable_added" from="HBoxContainer/Ants" to="." method="_on_cookable_added"]
 [connection signal="mouse_entered" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_exited"]

@@ -4,7 +4,8 @@ extends Node2D
 @export var eye : PackedScene
 @export var brains : PackedScene
 @export var bones : PackedScene
-
+signal organ_spawn
+signal bullet_spawn
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
@@ -20,7 +21,6 @@ var ENEMY_DEFS = [
 	 	"target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
 	 	"angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 161)},
 	 	"angry_sound": preload("res://zombie_mad.mp3"),
-		"is_angry": false
 	 },
 	# same but for mutant:
 	{
@@ -30,26 +30,24 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['bones', 'ant', 'eye'],
-		"on_kill": ['bones', 'brain'],
+		"on_kill": ['bones', 'brains'],
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
 		"angry_sound": preload("res://zombie_mad.mp3"),
-		"is_angry": false
 	},
-    {
+	{
 		"name": "mutant",
 		"calm_texture": preload("res://Sprites/mutant.png"),
 		"angry_texture": preload("res://Sprites/mutant_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['bones', 'ant', 'eye'],
-		"on_kill": ['bones', 'brain'],
+		"on_kill": ['bones', 'brains'],
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
 		"angry_sound": preload("res://zombie_mad.mp3"),
-		"is_angry": false
 	},
 	{
 		"name": "snake",
@@ -58,6 +56,7 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['eye'],
+		"on_kill": ['eye', 'bones'],
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(135, 158), 2: Vector2(515, 158)},
 		"angry_positions": {1: Vector2(127, 158), 2: Vector2(519, 158)},
@@ -68,23 +67,25 @@ var ENEMY_DEFS = [
 		"calm_texture": preload("res://Sprites/dog.png"),
 		"angry_texture": preload("res://Sprites/dog_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
-		"angry_scale": Vector2(0.1, 0.1),
+		"angry_scale": Vector2(0.117, 0.117),
 		"ingredients": ['bones'],
-		"spawn_y": 160,
-		"target_positions": {1: Vector2(160, 160), 2: Vector2(480, 160)},
-		"angry_positions": {1: Vector2(150, 180), 2: Vector2(490, 180)},
+		"on_kill": ['eye', 'bones'],
+		"spawn_y": 158,
+		"target_positions": {1: Vector2(128, 158), 2: Vector2(524, 158)},
+		"angry_positions": {1: Vector2(143, 150), 2: Vector2(506, 149)},
 		"angry_sound": preload("res://zombie_mad.mp3")
 	},
 	{
 		"name": "scorpion",
 		"calm_texture": preload("res://Sprites/scorpion_ugly.png"),
 		"angry_texture": preload("res://Sprites/scorpion_mad.png"),
-		"calm_scale": Vector2(0.1, 0.1),
-		"angry_scale": Vector2(0.1, 0.1),
+		"calm_scale": Vector2(0.121, 0.121),
+		"angry_scale": Vector2(0.114, 0.114),
 		"ingredients": ['eye'],
-		"spawn_y": 170,
-		"target_positions": {1: Vector2(170, 170), 2: Vector2(460, 170)},
-		"angry_positions": {1: Vector2(160, 190), 2: Vector2(470, 190)},
+		"on_kill": ['eye', 'bones'],
+		"spawn_y": 148,
+		"target_positions": {1: Vector2(129, 148), 2: Vector2(522, 148)},
+		"angry_positions": {1: Vector2(136, 151), 2: Vector2(507, 151)},
 		"angry_sound": preload("res://zombie_mad.mp3")
 	},
 	{
@@ -94,9 +95,10 @@ var ENEMY_DEFS = [
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
 		"ingredients": ['eye'],
-		"spawn_y": 180,
-		"target_positions": {1: Vector2(160, 160), 2: Vector2(500, 160)},
-		"angry_positions": {1: Vector2(170, 200), 2: Vector2(450, 200)},
+		"on_kill": ['eye', 'bones'],
+		"spawn_y": 133,
+		"target_positions": {1: Vector2(126, 133), 2: Vector2(525, 133)},
+		"angry_positions": {1: Vector2(131, 133), 2: Vector2(514, 133)},
 		"angry_sound": preload("res://zombie_mad.mp3")
 	}
 ]
@@ -133,7 +135,6 @@ func _unhandled_input(event):
 func _on_pot_food_spawned() -> void:
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.clicked.connect(_on_pickable_clicked)
-		print(node)
 
 func _on_drop_area_1_mouse_entered() -> void:
 	if held_object:
@@ -161,27 +162,29 @@ func satisfied(index : int):
 		temp.position = Vector2(100, 100)
 		add_child(temp)
 		print("[!] bullet added")
+		bullet_spawn.emit()
 	held_object.queue_free();
 	
 func spawn_organs(window_id : int):
 	var enemy = active_enemies[window_id]["def"]
 	var data = enemy["on_kill"]
-	print(data)
-	#for i in active_enemies[window_id].on_kill:
-		#var temp
-		#match i:
-			#"eye":
-				#temp = eye.instantiate()
-			#"brains":
-				#temp = brains.instantiate()
-			#"bones":
-				#temp = bones.instantiate()
-		#if (window_id == 1):
-			#temp.position = Vector2(120, 100);
-		#else:
-			#temp.position = Vector2(400, 100);
-		#temp.z_index = 3;
-		#add_child(temp);
+	for i in data:
+		var temp  # Random upward force between 50 and 200	
+		match i:
+			"eye":
+				temp = eye.instantiate()
+			"brains":
+				temp = brains.instantiate()
+			"bones":
+				temp = bones.instantiate()
+		if (window_id == 1):
+			temp.position = Vector2(120, 100);
+		else:
+			temp.position = Vector2(400, 100);
+		temp.apply_central_impulse(Vector2.UP * 1.63)
+		temp.z_index = 3;
+		add_child(temp);
+		organ_spawn.emit(temp.content)
 
 func _on_delayed_spawn():
 	spawn_enemy(2)

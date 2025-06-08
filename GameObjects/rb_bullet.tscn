@@ -7,7 +7,7 @@
 radius = 4.0
 height = 14.0
 
-[node name="RbBullet" type="RigidBody2D" groups=["pickable"]]
+[node name="RbBullet" type="RigidBody2D" groups=["bullet", "pickable"]]
 input_pickable = true
 mass = 50.0
 script = ExtResource("1_yxtxo")

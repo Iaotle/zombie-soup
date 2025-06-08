@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var heart_list : Array[TextureRect] = [];
 var health = 4;
 

@@ -25,6 +25,8 @@ window/stretch/mode="canvas_items"
 
 enemies=""
 pickable=""
+main=""
+bullet=""
 
 [gui]
 

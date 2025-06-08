@@ -2,19 +2,24 @@ extends RigidBody2D
 
 @export var content : String = "Undefined"
 @export var bullet_price : int = 2
+@export var can_double_click : bool = true
 var mouse_in : bool = false
 signal clicked
+signal double_clicked
 
 var held = false
 
 func _ready() -> void:
 	z_index = 3
-	print(content)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
+		print("[CLICK] ", content)
 		clicked.emit(self)
-		print(content)
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click and mouse_in and can_double_click:
+			double_clicked.emit(content)
+			queue_free()
 		
 func _physics_process(delta):
 	if held:

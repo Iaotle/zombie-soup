@@ -30,4 +30,4 @@ func _on_timer_timeout() -> void:
 	new_ant.connect("ant_clicked", _update_ui)
 
 func _update_ui():
-	emit_signal("update_ant_count");
+	emit_signal("update_ant_count", 1);
