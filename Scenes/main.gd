@@ -1,42 +1,28 @@
 extends Node2D
 
-@export var bullet : PackedScene
-@export var eye : PackedScene
-@export var brains : PackedScene
-@export var bones : PackedScene
-@export var ant : PackedScene
+@export var bullet: PackedScene
+@export var eye: PackedScene
+@export var brains: PackedScene
+@export var bones: PackedScene
+@export var ant: PackedScene
 signal organ_spawn
 signal bullet_spawn
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
 	 {
-	 	"name": "zombie",
-	 	"calm_texture": preload("res://Sprites/zombie.png"),
-	 	"angry_texture": preload("res://Sprites/zombie_mad.png"),
-	 	"calm_scale": Vector2(0.13, 0.13),
-	 	"angry_scale": Vector2(0.139, 0.139),
-	 	"ingredients": ['eye', 'brains'],
+		"name": "zombie",
+		"calm_texture": preload("res://Sprites/zombie.png"),
+		"angry_texture": preload("res://Sprites/zombie_mad.png"),
+		"calm_scale": Vector2(0.13, 0.13),
+		"angry_scale": Vector2(0.139, 0.139),
+		"ingredients": ['eye', 'brains'],
 		"on_kill": ['eye', 'bones'],
-	 	"spawn_y": 142,
-	 	"target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
-	 	"angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 161)},
-	 	"angry_sound": preload("res://zombie_mad.mp3"),
-	 },
-	# same but for mutant:
-	{
-		"name": "mutant",
-		"calm_texture": preload("res://Sprites/mutant.png"),
-		"angry_texture": preload("res://Sprites/mutant_mad.png"),
-		"calm_scale": Vector2(0.1, 0.1),
-		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['bones', 'ant', 'eye'],
-		"on_kill": ['bones', 'brains'],
-		"spawn_y": 136,
-		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
-		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
+		"spawn_y": 142,
+		"target_positions": {1: Vector2(144, 142), 2: Vector2(498, 142)},
+		"angry_positions": {1: Vector2(133, 161), 2: Vector2(509, 161)},
 		"angry_sound": preload("res://zombie_mad.mp3"),
-	},
+	 },
 	{
 		"name": "mutant",
 		"calm_texture": preload("res://Sprites/mutant.png"),
@@ -48,7 +34,7 @@ var ENEMY_DEFS = [
 		"spawn_y": 136,
 		"target_positions": {1: Vector2(135, 136), 2: Vector2(518, 136)},
 		"angry_positions": {1: Vector2(146, 133), 2: Vector2(512, 133)},
-		"angry_sound": preload("res://zombie_mad.mp3"),
+		"angry_sound": preload("res://mutant_mad.mp3"),
 	},
 	{
 		"name": "snake",
@@ -61,7 +47,7 @@ var ENEMY_DEFS = [
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(135, 158), 2: Vector2(515, 158)},
 		"angry_positions": {1: Vector2(127, 158), 2: Vector2(519, 158)},
-		"angry_sound": preload("res://zombie_mad.mp3")
+		"angry_sound": preload("res://snake_mad.mp3")
 	},
 	{
 		"name": "dog",
@@ -74,7 +60,7 @@ var ENEMY_DEFS = [
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(128, 158), 2: Vector2(524, 158)},
 		"angry_positions": {1: Vector2(143, 150), 2: Vector2(506, 149)},
-		"angry_sound": preload("res://zombie_mad.mp3")
+		"angry_sound": preload("res://dog_mad.mp3")
 	},
 	{
 		"name": "scorpion",
@@ -95,12 +81,12 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/yeti_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['eye'],
-		"on_kill": ['eye', 'bones'],
+		"ingredients": ['bones', 'brain', 'eye', 'ant'],
+		"on_kill": ['brains', 'bones'],
 		"spawn_y": 133,
 		"target_positions": {1: Vector2(126, 133), 2: Vector2(525, 133)},
 		"angry_positions": {1: Vector2(131, 133), 2: Vector2(514, 133)},
-		"angry_sound": preload("res://zombie_mad.mp3")
+		"angry_sound": preload("res://yeti_mad.mp3")
 	}
 ]
 
@@ -161,7 +147,7 @@ func _on_drop_area_2_mouse_entered() -> void:
 			else:
 				_become_angry(2)
 
-func satisfied(index : int):
+func satisfied(index: int):
 	_remove_enemy(index);
 	spawn_enemy(index)
 	
@@ -174,11 +160,11 @@ func satisfied(index : int):
 	update_pickables();
 	held_object.queue_free();
 	
-func spawn_organs(window_id : int):
+func spawn_organs(window_id: int):
 	var enemy = active_enemies[window_id]["def"]
 	var data = enemy["on_kill"]
 	for i in data:
-		var temp  # Random upward force between 50 and 200	
+		var temp # Random upward force between 50 and 200
 		match i:
 			"eye":
 				temp = eye.instantiate()
@@ -189,10 +175,21 @@ func spawn_organs(window_id : int):
 			"ant":
 				temp = ant.instantiate()
 		if (window_id == 1):
-			temp.position = Vector2(120, 100);
+			temp.position = Vector2(130, 150);
 		else:
-			temp.position = Vector2(400, 100);
-		temp.apply_central_impulse(Vector2.UP * 16.63)
+			temp.position = Vector2(520, 150);
+		# apply a vector with a somewhat random upwards direction
+		# how far from straight up (in degrees) you’re willing to stray
+		var max_degrees = 20
+		var max_radians = deg_to_rad(max_degrees)
+		
+		# pick a random angle between –max and +max
+		var random_angle = randf_range(-max_radians, max_radians)
+		
+		# rotate the UP vector by that angle, then scale it
+		var strength = 500.63
+		var vector = Vector2.UP.rotated(random_angle) * strength
+		temp.apply_central_impulse(vector)
 		temp.z_index = 3;
 		add_child(temp);
 		organ_spawn.emit(temp.content)
@@ -279,8 +276,16 @@ func _process(delta):
 					sprite.position = target
 					data["state"] = "waiting"
 					data["current_ingredient"] = def["ingredients"][randi() % def["ingredients"].size()]
+
+					# Play brain sound if this is a zombie demanding brains
+					if def["name"] == "zombie" and data["current_ingredient"] == "brains":
+						var brain_sound = AudioStreamPlayer2D.new()
+						brain_sound.stream = preload("res://brain.mp3")
+						brain_sound.position = sprite.position
+						add_child(brain_sound)
+						brain_sound.play()
+
 					print("%s arrived at window %d, demand: %s" % [def["name"], window_id, data["current_ingredient"]])
-					# create res://Sprites/chat.png bubble, position it above the sprite. Put res://Sprites/{ingredient}.png inside it.
 					_create_chat_bubble(data["current_ingredient"], window_id)
 					sprite.z_index = 0
 					data["demand_timer"].start(5)

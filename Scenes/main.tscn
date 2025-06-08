@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://funbevyd5jtw"]
+[gd_scene load_steps=22 format=3 uid="uid://funbevyd5jtw"]
 
 [ext_resource type="PackedScene" uid="uid://cgx045qeg6ebk" path="res://Scenes/parallax.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://duqfm43noky6r" path="res://Scenes/main.gd" id="1_d1ilt"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b6awofdhr2op0" path="res://drinking-glasses-contact-clink-7172.mp3" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://tg1s5rhvgicq" path="res://GameObjects/rb_bones.tscn" id="5_fevyy"]
 [ext_resource type="PackedScene" uid="uid://dve1iy000ntm2" path="res://Scenes/underthecounter.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://c2cxeuv7di4ay" path="res://GameObjects/rb_ant.tscn" id="6_fevyy"]
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
@@ -31,6 +32,7 @@ bullet = ExtResource("2_jkdf5")
 eye = ExtResource("3_h1bgf")
 brains = ExtResource("4_b3802")
 bones = ExtResource("5_fevyy")
+ant = ExtResource("6_fevyy")
 
 [node name="Parallax" parent="." instance=ExtResource("1_bo1nx")]
 
