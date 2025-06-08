@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3tkgdxbtxl8r"]
+[gd_scene load_steps=11 format=3 uid="uid://c3tkgdxbtxl8r"]
 
 [ext_resource type="Script" uid="uid://dvsi3wfaurdqk" path="res://Scenes/inventory_ui.gd" id="1_7oojl"]
 [ext_resource type="Texture2D" uid="uid://cxe6a2viyomyn" path="res://Sprites/ant.png" id="1_brbew"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://kx8im43q30lu" path="res://Sprites/brains.png" id="3_6o8f3"]
 [ext_resource type="Texture2D" uid="uid://b2td8q16yoyur" path="res://Sprites/bones.png" id="4_m65me"]
 [ext_resource type="PackedScene" uid="uid://c2cxeuv7di4ay" path="res://GameObjects/rb_ant.tscn" id="4_ota2j"]
+[ext_resource type="PackedScene" uid="uid://mqxmj4vw0tte" path="res://GameObjects/rb_eye.tscn" id="6_g80pn"]
+[ext_resource type="PackedScene" uid="uid://bka6rl2km75ef" path="res://GameObjects/rb_brain.tscn" id="8_wef62"]
+[ext_resource type="PackedScene" uid="uid://tg1s5rhvgicq" path="res://GameObjects/rb_bones.tscn" id="10_50p73"]
 
 [node name="InventoryUi" type="CanvasLayer"]
 script = ExtResource("1_7oojl")
@@ -39,6 +42,8 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("2_7oojl")
 expand_mode = 2
+script = ExtResource("2_6o8f3")
+rigid_body = ExtResource("6_g80pn")
 
 [node name="Label" type="Label" parent="HBoxContainer/Eyes"]
 layout_mode = 0
@@ -53,6 +58,8 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("3_6o8f3")
 expand_mode = 2
+script = ExtResource("2_6o8f3")
+rigid_body = ExtResource("8_wef62")
 
 [node name="Label" type="Label" parent="HBoxContainer/Brains"]
 layout_mode = 0
@@ -67,6 +74,8 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("4_m65me")
 expand_mode = 2
+script = ExtResource("2_6o8f3")
+rigid_body = ExtResource("10_50p73")
 
 [node name="Label" type="Label" parent="HBoxContainer/Bones"]
 layout_mode = 0
@@ -76,5 +85,15 @@ offset_right = 67.0
 offset_bottom = 53.0
 text = "0"
 
+[connection signal="cookable_added" from="HBoxContainer/Ants" to="." method="_on_cookable_added"]
 [connection signal="mouse_entered" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Ants" to="HBoxContainer/Ants" method="_on_mouse_exited"]
+[connection signal="cookable_added" from="HBoxContainer/Eyes" to="." method="_on_cookable_added"]
+[connection signal="mouse_entered" from="HBoxContainer/Eyes" to="HBoxContainer/Eyes" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Eyes" to="HBoxContainer/Eyes" method="_on_mouse_exited"]
+[connection signal="cookable_added" from="HBoxContainer/Brains" to="." method="_on_cookable_added"]
+[connection signal="mouse_entered" from="HBoxContainer/Brains" to="HBoxContainer/Brains" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Brains" to="HBoxContainer/Brains" method="_on_mouse_exited"]
+[connection signal="cookable_added" from="HBoxContainer/Bones" to="." method="_on_cookable_added"]
+[connection signal="mouse_entered" from="HBoxContainer/Bones" to="HBoxContainer/Bones" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Bones" to="HBoxContainer/Bones" method="_on_mouse_exited"]

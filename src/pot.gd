@@ -40,7 +40,6 @@ func content_check():
 			spawn_bowl("Brains and Bones Broth")
 			return
 	spawn_bowl("Garbage")
-	
 
 func spawn_bowl(content : String):
 	var food = bowl.instantiate()

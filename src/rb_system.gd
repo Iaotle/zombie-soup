@@ -1,14 +1,19 @@
 extends RigidBody2D
 
-var content : String
+@export var content : String
 var mouse_in : bool = false
 signal clicked
 
 var held = false
 
+func _ready() -> void:
+	z_index = 3
+	print(content)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
 		clicked.emit(self)
+		print(content)
 		
 func _physics_process(delta):
 	if held:

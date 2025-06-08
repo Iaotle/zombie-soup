@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var spawner : Node2D
-
+signal inventory_spawn
 var item_list : Array[Label] = []
 
 var ants 	= Item.new();
@@ -35,3 +35,5 @@ func _update_ant_count():
 	ants.update_amount(1);
 	ants_label.text 	= str(ants.amount);
 	
+func _on_cookable_added() -> void:
+	emit_signal("inventory_spawn")

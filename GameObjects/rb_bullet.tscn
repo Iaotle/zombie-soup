@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bp6dwgsan277g"]
 
-[ext_resource type="Script" path="res://src/rb_system.gd" id="1_yxtxo"]
+[ext_resource type="Script" uid="uid://c5dsg0yxj8ofe" path="res://src/rb_system.gd" id="1_yxtxo"]
 [ext_resource type="Texture2D" uid="uid://3e11h2roa1dl" path="res://Sprites/shotgun_shell.png" id="2_yxtxo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tl8wn"]
@@ -9,7 +9,9 @@ height = 14.0
 
 [node name="RbBullet" type="RigidBody2D" groups=["pickable"]]
 input_pickable = true
+mass = 50.0
 script = ExtResource("1_yxtxo")
+content = "Bullet"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.02, 0.02)
@@ -17,3 +19,6 @@ texture = ExtResource("2_yxtxo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tl8wn")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
