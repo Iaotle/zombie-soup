@@ -292,6 +292,7 @@ func _process(delta):
 						brain_sound.position = sprite.position
 						add_child(brain_sound)
 						brain_sound.play()
+						brain_sound.connect('finished', brain_sound.queue_free)
 
 					print("%s arrived at window %d, demand: %s" % [def["name"], window_id, data["current_ingredient"]])
 					_create_chat_bubble(data["current_ingredient"], window_id)
@@ -334,6 +335,7 @@ func _become_angry(window_id):
 	snd.position.y = screen_size.y / 2
 	add_child(snd)
 	snd.play()
+	snd.connect('finished', snd.queue_free)
 	print("%s is angry at window %d!" % [def["name"], window_id])
 	data["angry_timer"].start(5)
 

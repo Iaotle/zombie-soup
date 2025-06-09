@@ -3,7 +3,7 @@ extends Sprite2D
 @export var pov_sprite_path: String = "res://Sprites/shotgun-pov.png"
 @export var reload_sound_path: String = "res://reload.mp3"
 @export var fire_sounds: Array[String] = ["res://shotgun-fire-1.mp3", "res://shotgun-fire-2.mp3"]
-@export var camera: Camera2D 
+@export var camera: Camera2D
 
 var picked_up := false
 var pov_sprite: Sprite2D
@@ -57,7 +57,7 @@ func _pickup_shotgun():
 		reload_audio.stream = load(reload_sound_path)
 		get_tree().current_scene.add_child(reload_audio)
 		reload_audio.play()
-
+		reload_audio.connect('finished', reload_audio.queue_free)
 func _fire_shotgun():
 	var fire_audio = AudioStreamPlayer.new()
 	var sound_path = fire_sounds[randi() % fire_sounds.size()]
@@ -65,3 +65,10 @@ func _fire_shotgun():
 	get_tree().current_scene.add_child(fire_audio)
 	fire_audio.play()
 	fire_audio.connect("finished", fire_audio.queue_free)
+	var shell_audio = AudioStreamPlayer.new()
+	shell_audio.stream = preload('res://shell_drop.mp3')
+	get_tree().current_scene.add_child(shell_audio)
+	shell_audio.connect("finished", shell_audio.queue_free)
+
+	var start: float = randf_range(0, 1.5)
+	shell_audio.play(start)
