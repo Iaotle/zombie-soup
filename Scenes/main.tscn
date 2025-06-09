@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://ct1q0vl12ur8f" path="res://Concepts/ChatGPT Image Jun 7, 2025, 05_45_49 PM.png" id="10_6iyac"]
 [ext_resource type="Script" uid="uid://dwmwee0tiggq6" path="res://Scenes/shotgun.gd" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://cssjkv5rjo6u0" path="res://Scenes/pot.tscn" id="11_d1ilt"]
-[ext_resource type="AudioStream" uid="uid://rwl70l01ib1s" path="res://lasttrain.wav" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bubls8i4kjgnd" path="res://Scenes/drop_area.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://csgmkf5skwp7t" path="res://Scenes/player.tscn" id="13_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://naetmu6f1mya" path="res://Sprites/sign_mouse_down.png" id="18_b3802"]
+[ext_resource type="AudioStream" uid="uid://colocket4jd5d" path="res://lasttrain.mp3" id="18_fevyy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(639, 83.5)
@@ -104,7 +104,7 @@ spawner = NodePath("../../Under The Counter")
 position = Vector2(287, 136)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_6iyac")
+stream = ExtResource("18_fevyy")
 volume_db = -2.0
 autoplay = true
 
