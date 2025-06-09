@@ -16,11 +16,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_in:
 		clicked.emit(self)
 	if event.is_action_released("left_click") and mouse_in:
-		double_clicked.emit(content)
+		double_clicked.emit(content, position)
 		queue_free()
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click and mouse_in and can_double_click:
-			double_clicked.emit(content)
+			double_clicked.emit(content, position)
 			queue_free()
 		
 func _physics_process(delta):

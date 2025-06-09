@@ -138,8 +138,8 @@ func _on_drop_area_1_mouse_entered() -> void:
 	if held_object:
 		print("[AREA 1]: ", held_object.content)
 		if active_enemies[1] and active_enemies[1].state != "angry":
-			if active_enemies[1].current_ingredient == held_object.content:
-				satisfied(1)
+			if active_enemies[1].current_ingredient == held_object.content or held_object.content.to_lower().contains(active_enemies[1].current_ingredient):
+				satisfied(1, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
 			else:
 				_become_angry(1)
 
@@ -147,15 +147,16 @@ func _on_drop_area_2_mouse_entered() -> void:
 	if held_object:
 		print("[AREA 2]: ", held_object.content)
 		if active_enemies.size() == 2 and active_enemies[2] and active_enemies[2].state != "angry":
-			if active_enemies[2].current_ingredient == held_object.content:
-				satisfied(2)
+			if active_enemies[2].current_ingredient == held_object.content or held_object.content.to_lower().contains(active_enemies[2].current_ingredient):
+				satisfied(2, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
 			else:
 				_become_angry(2)
 
-func satisfied(index: int):
+func satisfied(index: int, soup: bool = false):
+	print('satisfied with soup: ', soup)
 	_remove_enemy(index);
 	spawn_enemy(index)
-	enemy_satisfied.emit(10)
+	enemy_satisfied.emit(100 if soup else 10)
 	for i in range(0, held_object.bullet_price):
 		var temp = bullet.instantiate()
 		temp.z_index = 3

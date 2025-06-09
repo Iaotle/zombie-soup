@@ -65,8 +65,15 @@ func _on_cookable_added(obj_name) -> void:
 		node.double_clicked.connect(_on_pickable_clicked)
 	emit_signal("inventory_spawn")
 
-func _on_pickable_clicked(obj_name):
-	print(obj_name)
+func _on_pickable_clicked(obj_name, position):
+	print('[pot]', obj_name, position)
+	
+	if (position.x > 320 and position.x < 400 and position.y > 200 and position.y < 225):
+		var pot = get_tree().current_scene.get_node('Pot')
+		pot.contents.append(obj_name)
+		print('[POT] Ingredient %s added' % obj_name)
+		pot.content_check()
+		return
 	match obj_name:
 		"ant":
 			ants.update_amount(1);
