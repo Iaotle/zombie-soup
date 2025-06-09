@@ -42,7 +42,7 @@ var ENEMY_DEFS = [
 		"angry_texture": preload("res://Sprites/snake_mad.png"),
 		"calm_scale": Vector2(0.1, 0.1),
 		"angry_scale": Vector2(0.1, 0.1),
-		"ingredients": ['eye'],
+		"ingredients": ['eye', 'bones'],
 		"on_kill": ['eye', 'brains'],
 		"spawn_y": 158,
 		"target_positions": {1: Vector2(135, 158), 2: Vector2(515, 158)},
@@ -349,6 +349,7 @@ func _input(event):
 				var bullets = $Player/bullet_ui.bullet_count
 				if bullets == 0:
 					print("No bullets left!")
+					$Shotgun.empty = true
 					# play sound for no bullets
 					var trigger_click = AudioStreamPlayer.new()
 					trigger_click.stream = preload("res://gun_empty.mp3")
@@ -356,6 +357,8 @@ func _input(event):
 					trigger_click.play()
 					trigger_click.connect("finished", trigger_click.queue_free)
 					return
+				else:
+					$Shotgun.empty = false
 				$Player/bullet_ui.update_count(-1)
 				
 				$Shotgun.put_down_shotgun()

@@ -8,6 +8,7 @@ extends Sprite2D
 var picked_up := false
 var pov_sprite: Sprite2D
 var crosshair = preload("res://Sprites/crosshair.png")
+var empty = false
 
 func _ready():
 	set_process_input(true)
@@ -51,10 +52,11 @@ func _pickup_shotgun():
 	var viewport_size = get_viewport().get_visible_rect().size
 	pov_sprite.position = Vector2(viewport_size.x / 2, viewport_size.y - 100)
 	get_tree().current_scene.add_child(pov_sprite)
-	var reload_audio = AudioStreamPlayer.new()
-	reload_audio.stream = load(reload_sound_path)
-	get_tree().current_scene.add_child(reload_audio)
-	reload_audio.play()
+	if !empty:
+		var reload_audio = AudioStreamPlayer.new()
+		reload_audio.stream = load(reload_sound_path)
+		get_tree().current_scene.add_child(reload_audio)
+		reload_audio.play()
 
 func _fire_shotgun():
 	var fire_audio = AudioStreamPlayer.new()
