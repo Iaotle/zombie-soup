@@ -4,7 +4,7 @@ var y_offset = 57
 var in_bar = true
 var target_position: Vector2
 var is_moving = false
-var move_speed = 400
+@export var move_speed = 600
 
 # store the sign's original local position
 var sign_default_pos: Vector2

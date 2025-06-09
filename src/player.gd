@@ -2,6 +2,7 @@ extends Node2D
 
 var heart_list : Array[TextureRect] = [];
 var health = 4;
+signal damage_taken
 
 func _ready() -> void:
 	var heart_parent = $HealthBar.get_child(0);
@@ -16,10 +17,10 @@ func take_damage():
 	if health > 0:
 		health -= 1;
 		update_heart();
+		emit_signal("damage_taken")
 	if health == 0:
 		game_over();
 		# game over here
-
 
 func game_over():
 	var label = Label.new()

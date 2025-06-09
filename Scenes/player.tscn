@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://csgmkf5skwp7t"]
+[gd_scene load_steps=6 format=3 uid="uid://csgmkf5skwp7t"]
 
 [ext_resource type="Script" uid="uid://dsnptngxpye00" path="res://src/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://bgkv1lmbb7iut" path="res://Scenes/HealthBar.tscn" id="2_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://c3tkgdxbtxl8r" path="res://Scenes/inventory_ui.tscn" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://ctd0xklujbt4j" path="res://Scenes/bullet_ui.tscn" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://bucq73daba4nq" path="res://src/score.gd" id="5_fkybt"]
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_v0iea")
@@ -13,3 +14,13 @@ script = ExtResource("1_v0iea")
 [node name="InventoryUi" parent="." instance=ExtResource("3_6t5aa")]
 
 [node name="bullet_ui" parent="." instance=ExtResource("4_vgqql")]
+
+[node name="Score" type="Label" parent="."]
+offset_left = 89.0
+offset_top = 312.0
+offset_right = 138.0
+offset_bottom = 332.0
+text = "SCORE:"
+script = ExtResource("5_fkybt")
+
+[connection signal="damage_taken" from="." to="Score" method="_on_damage_taken"]

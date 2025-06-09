@@ -7,6 +7,9 @@ extends Node2D
 @export var ant: PackedScene
 signal organ_spawn
 signal bullet_spawn
+signal enemy_killed
+signal enemy_satisfied
+
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
@@ -152,7 +155,7 @@ func _on_drop_area_2_mouse_entered() -> void:
 func satisfied(index: int):
 	_remove_enemy(index);
 	spawn_enemy(index)
-	
+	enemy_satisfied.emit(10)
 	for i in range(0, held_object.bullet_price):
 		var temp = bullet.instantiate()
 		temp.z_index = 3
@@ -360,7 +363,7 @@ func _input(event):
 				else:
 					$Shotgun.empty = false
 				$Player/bullet_ui.update_count(-1)
-				
+				enemy_killed.emit(5)
 				$Shotgun.put_down_shotgun()
 				print("%s at window %d shot!" % [data["def"]["name"], window_id])
 				data["angry_timer"].stop()
