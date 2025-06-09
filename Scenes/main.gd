@@ -101,7 +101,7 @@ var active_enemies := {}
 #drag and drop mechanic
 var held_object = null
 
-func set_held_object(obj : RigidBody2D):
+func set_held_object(obj: RigidBody2D):
 	held_object = obj
 	print(held_object)
 
@@ -142,6 +142,8 @@ func _on_drop_area_1_mouse_entered() -> void:
 				satisfied(1, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
 			else:
 				_become_angry(1)
+	if $Shotgun.picked_up:
+		_become_angry(1)
 
 func _on_drop_area_2_mouse_entered() -> void:
 	if held_object:
@@ -151,6 +153,8 @@ func _on_drop_area_2_mouse_entered() -> void:
 				satisfied(2, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
 			else:
 				_become_angry(2)
+	if $Shotgun.picked_up:
+		_become_angry(2)
 
 func satisfied(index: int, soup: bool = false):
 	print('satisfied with soup: ', soup)
