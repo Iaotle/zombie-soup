@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+zombiesoup.apk
+zombiesoup.console.exe
+zombiesoup.exe
+zombiesoup.pck
