@@ -70,5 +70,5 @@ func _fire_shotgun():
 	get_tree().current_scene.add_child(shell_audio)
 	shell_audio.connect("finished", shell_audio.queue_free)
 
-	var start: float = randf_range(0, 1.5)
+	var start: float = randf_range(0, 1.8)
 	shell_audio.play(start)
