@@ -36,8 +36,16 @@ func content_check():
 				has_bone = true
 	if contents.size() == 2:
 		contents.clear()
-		if has_ant and has_eye:
+		if has_eye and has_ant:
 			spawn_bowl("Eye and Ants Soup")
+		elif has_eye and has_brain:
+			spawn_bowl("Eye-Brains Coordinator Brew")
+		elif has_eye and has_bone:
+			spawn_bowl("Bone-Eye Balm")
+		elif has_ant and has_brain:
+			spawn_bowl("Ant-Brain Creepy Crawlie")
+		elif has_ant and has_bone:
+			spawn_bowl("Crunchy Fossil Special")
 		elif has_brain and has_bone:
 			spawn_bowl("Brains and Bones Broth")
 		else:
