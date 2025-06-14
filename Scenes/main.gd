@@ -9,6 +9,9 @@ signal organ_spawn
 signal enemy_killed
 signal enemy_satisfied
 
+var SOUP_DEFS =	['Eye and Ants Soup', 'Eye-Brains Coordinator Brew', 'Bone-Eye Balm', 'Ant-Brain Creepy Crawlie', 'Crunchy Fossil Special', 'Brains and Bones Broth']
+
+
 # Define your enemy types here:
 var ENEMY_DEFS = [
 	# Add dictionaries here following the example above, e.g. skeleton, mutant, etc.
@@ -138,7 +141,7 @@ func _on_drop_area_1_mouse_entered() -> void:
 		print("[AREA 1]: ", held_object.content)
 		if active_enemies[1] and active_enemies[1].state != "angry":
 			if active_enemies[1].current_ingredient == held_object.content or held_object.content.to_lower().contains(active_enemies[1].current_ingredient):
-				satisfied(1, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
+				satisfied(1, true if SOUP_DEFS.find(held_object.content) != -1 else false)
 			else:
 				_become_angry(1)
 	if $Shotgun.picked_up:
@@ -149,7 +152,7 @@ func _on_drop_area_2_mouse_entered() -> void:
 		print("[AREA 2]: ", held_object.content)
 		if active_enemies.size() == 2 and active_enemies[2] and active_enemies[2].state != "angry":
 			if active_enemies[2].current_ingredient == held_object.content or held_object.content.to_lower().contains(active_enemies[2].current_ingredient):
-				satisfied(2, true if ['Eye and Ants Soup', 'Brains and Bones Broth'].find(held_object.content) != -1 else false)
+				satisfied(2, true if SOUP_DEFS.find(held_object.content) != -1 else false)
 			else:
 				_become_angry(2)
 	if $Shotgun.picked_up:

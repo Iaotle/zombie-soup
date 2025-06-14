@@ -60,8 +60,20 @@ func spawn_bowl(content : String):
 	var food = bowl.instantiate()
 	food.content = content
 	food.get_node("CenterContainer/Label").text = content
+
+	# Generate a strong placeholder color based on a hash of the content
+	var h = hash(content)
+	var r = (h >> 16) & 0xFF
+	var g = (h >> 8) & 0xFF
+	var b = h & 0xFF
+	var color = Color8(r, g, b, 255)  # fully opaque
+
+	food.get_node("Bowl").modulate = color
+	# TODO: disable double-click on soups
+
 	add_child(food)
 	emit_signal("food_spawned")
+
 	
 func _on_food_cooked():
 	content_check()
