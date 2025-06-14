@@ -17,10 +17,12 @@ func _input(event: InputEvent) -> void:
 		clicked.emit(self)
 	if event.is_action_released("left_click") and mouse_in:
 		double_clicked.emit(content, position)
+		get_tree().current_scene.get_node("Player/bullet_ui").update_count(1)
 		queue_free()
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click and mouse_in and can_double_click:
 			double_clicked.emit(content, position)
+			get_tree().current_scene.get_node("Player/bullet_ui").update_count(1)
 			queue_free()
 
 func _physics_process(delta):

@@ -6,7 +6,6 @@ extends Node2D
 @export var bones: PackedScene
 @export var ant: PackedScene
 signal organ_spawn
-signal bullet_spawn
 signal enemy_killed
 signal enemy_satisfied
 
@@ -166,7 +165,6 @@ func satisfied(index: int, soup: bool = false):
 		temp.z_index = 3
 		temp.position = Vector2(100, 100)
 		add_child(temp)
-		bullet_spawn.emit()
 	update_pickables();
 	held_object.queue_free();
 	
@@ -343,6 +341,10 @@ func _become_angry(window_id):
 	snd.connect('finished', snd.queue_free)
 	print("%s is angry at window %d!" % [def["name"], window_id])
 	data["angry_timer"].start(5)
+	if active_bubbles.has(window_id):
+		active_bubbles[window_id].queue_free()
+		active_bubbles.erase(window_id)
+
 
 func _input(event):
 	# TODO: ctrl+s to mute/unmute sound effects
@@ -403,7 +405,7 @@ func _remove_enemy(window_id):
 	data["sprite"].queue_free()
 	data["demand_timer"].queue_free()
 	data["angry_timer"].queue_free()
+	active_enemies.erase(window_id)
 	if active_bubbles.has(window_id):
 		active_bubbles[window_id].queue_free()
-	active_enemies.erase(window_id)
-	active_bubbles.erase(window_id)
+		active_bubbles.erase(window_id)
