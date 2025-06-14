@@ -66,9 +66,9 @@ func _on_cookable_added(obj_name) -> void:
 	emit_signal("inventory_spawn")
 
 func _on_pickable_clicked(obj_name, position):
-	print('[pot]', obj_name, position)
-	
-	if (position.x > 320 and position.x < 400 and position.y > 200 and position.y < 225):
+	if obj_name.contains("soup"):
+		return
+	if (position.x > 280 and position.x < 400 and position.y > 170 and position.y < 250):  
 		var pot = get_tree().current_scene.get_node('Pot')
 		pot.contents.append(obj_name)
 		print('[POT] Ingredient %s added' % obj_name)

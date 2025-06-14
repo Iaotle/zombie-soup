@@ -23,7 +23,6 @@ func _ready() -> void:
 	sprite.play("default");
 
 func content_check():
-	print('abcd', contents)
 	for i in contents:
 		match i:
 			"eye":
@@ -37,17 +36,17 @@ func content_check():
 	if contents.size() == 2:
 		contents.clear()
 		if has_eye and has_ant:
-			spawn_bowl("Eye and Ants Soup")
+			spawn_bowl("[soup] Eye and Ants Soup")
 		elif has_eye and has_brain:
-			spawn_bowl("Eye-Brains Coordinator Brew")
+			spawn_bowl("[soup] Eye-Brains Coordinator Brew")
 		elif has_eye and has_bone:
-			spawn_bowl("Bone-Eye Balm")
+			spawn_bowl("[soup] Bone-Eye Balm [bones eye]")
 		elif has_ant and has_brain:
-			spawn_bowl("Ant-Brain Creepy Crawlie")
+			spawn_bowl("[soup] Ant-Brain Creepy Crawlie [brains]")
 		elif has_ant and has_bone:
-			spawn_bowl("Crunchy Fossil Special")
+			spawn_bowl("[soup] Crunchy Fossil Special [ant bones]")
 		elif has_brain and has_bone:
-			spawn_bowl("Brains and Bones Broth")
+			spawn_bowl("[soup] Brains and Bones Broth")
 		else:
 			spawn_bowl("Garbage")
 		has_eye = false

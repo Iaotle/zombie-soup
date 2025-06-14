@@ -17,6 +17,7 @@ func _input(event: InputEvent) -> void:
 		clicked.emit(self)
 	if event.is_action_released("left_click") and mouse_in:
 		double_clicked.emit(content, position)
+		# TODO: don't free if soup
 		queue_free()
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click and mouse_in and can_double_click:
